@@ -105,8 +105,8 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
 
                 stavke.add(st);
 
-                System.out.println("Uspesno vracene sve stavke racuna.");
             }
+            System.out.println("Uspesno vracene sve stavke racuna.");
         } catch (SQLException ex) {
             Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -135,8 +135,9 @@ public class Korisnik implements Serializable, IDomenskiObjekat {
                 korisnik.setKorisnickoIme(rs.getString("korisnickoIme"));
 
                 korisnici.add(korisnik);
-                System.out.println("Uspesno vraceni klijenti.");
+
             }
+            System.out.println("Uspesno vraceni klijenti.");
         } catch (SQLException ex) {
             Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
         }

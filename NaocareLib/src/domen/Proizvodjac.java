@@ -96,9 +96,9 @@ public class Proizvodjac implements Serializable, IDomenskiObjekat {
                 proizvodjac.setNaziv(rs.getString("naziv"));
                 proizvodjac.setZemlja(rs.getString("zemlja"));
                 proizvodjaci.add(proizvodjac);
-                System.out.println("Uspesno vraceni proizvodjaci.");
 
             }
+            System.out.println("Uspesno vraceni proizvodjaci.");
 
         } catch (SQLException ex) {
             Logger.getLogger(Proizvodjac.class.getName()).log(Level.SEVERE, null, ex);

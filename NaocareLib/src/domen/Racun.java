@@ -116,8 +116,8 @@ public class Racun implements Serializable, IDomenskiObjekat {
                 racun.setKorisnik(korisnik);
                 racuni.add(racun);
 
-                System.out.println("Uspesno vraceni racuni.");
             }
+            System.out.println("Uspesno vraceni racuni.");
         } catch (SQLException ex) {
             Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
         }

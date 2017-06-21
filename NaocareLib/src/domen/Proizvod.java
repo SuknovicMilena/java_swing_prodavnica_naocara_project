@@ -130,9 +130,9 @@ public class Proizvod implements Serializable, IDomenskiObjekat {
 
                 proizvod.setProizvodjac(p);
                 proizvodi.add(proizvod);
-                System.out.println("Uspesno vraceni proizvodi.");
-            }
 
+            }
+            System.out.println("Uspesno vraceni proizvodi.");
         } catch (Exception e) {
 
         }
