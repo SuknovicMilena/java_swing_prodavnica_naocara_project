@@ -204,13 +204,15 @@ public class Kontroler {
         }
 
     }
-      public void obrisiStavkuRacuna(StavkaRacuna selektovaniRed) throws SQLException, IOException, Exception {
+
+    public void obrisiStavkuRacuna(StavkaRacuna selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
         AbstractSystemOperation so = new ObrisiStavkuRacunaSO(dBBroker);
         so.execute(selektovaniRed);
 
     }
-        public void obrisiRacun(Racun selektovaniRed) throws SQLException, IOException, Exception {
+
+    public void obrisiRacun(Racun selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
         AbstractSystemOperation so = new ObrisiRacunSO(dBBroker);
         so.execute(selektovaniRed);

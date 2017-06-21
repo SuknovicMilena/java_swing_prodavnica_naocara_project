@@ -7,7 +7,6 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
-import domen.Korisnik;
 import domen.StavkaRacuna;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class VratiStavkeRacunaSO extends AbstractSystemOperation {
         for (IDomenskiObjekat ido : idos) {
             listaStavki.add((StavkaRacuna) ido);
         }
-         System.out.println("Izvrsava se slucaj koriscenja: Pregled stavki racuna. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Pregled stavki racuna. ");
     }
 
     public List<StavkaRacuna> getStavkeRacuna() {

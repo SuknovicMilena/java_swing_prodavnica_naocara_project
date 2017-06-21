@@ -7,8 +7,6 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
-import domen.Korisnik;
-
 import domen.Racun;
 import java.util.ArrayList;
 import java.util.List;

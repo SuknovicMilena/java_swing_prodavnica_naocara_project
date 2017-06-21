@@ -8,7 +8,6 @@ package modelTabele;
 import domen.Korisnik;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import nitiServer.NitKlijent;
 
 /**
  *

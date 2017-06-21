@@ -8,7 +8,6 @@ package businesslogic.systemoperation;
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
 import domen.Korisnik;
-import domen.Proizvod;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class VratiSveKorisnikeSO extends AbstractSystemOperation {
         for (IDomenskiObjekat ido : idos) {
             korisnici.add((Korisnik) ido);
         }
-         System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika. ");
     }
 
     public List<Korisnik> getKorisnici() {

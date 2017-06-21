@@ -7,8 +7,6 @@ package db;
 
 import domen.IDomenskiObjekat;
 import domen.Korisnik;
-import domen.Racun;
-import domen.StavkaRacuna;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;

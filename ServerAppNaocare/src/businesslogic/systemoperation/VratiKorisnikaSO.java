@@ -8,7 +8,6 @@ package businesslogic.systemoperation;
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
 import domen.Korisnik;
-import java.util.List;
 
 /**
  *
@@ -38,7 +37,7 @@ public class VratiKorisnikaSO extends AbstractSystemOperation {
     protected void executeOperation(Object object) throws Exception {
         String korIme = (String) object;
         idos = dBBroker.vratiObjekatPoNekojKoloni(korisnik, korIme);
-         System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika po nekom atributu. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika po nekom atributu. ");
     }
 
     public Korisnik getKorisnik() {

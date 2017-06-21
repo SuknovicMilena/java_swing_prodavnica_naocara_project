@@ -17,6 +17,7 @@ public class ServerApp {
     public static void main(String[] args) throws IOException, ClassNotFoundException, Exception {
         FServer fserver = new FServer();
         fserver.setVisible(true);
+        fserver.setLocationRelativeTo(null);
         System.out.println("Aplikacija je pokrenuta, server nije pokrenut.");
     }
 

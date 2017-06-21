@@ -7,7 +7,6 @@ package businesslogic.systemoperation;
 
 import businesslogic.systemoperation.AbstractSystemOperation;
 import db.DatabaseBroker;
-import domen.IDomenskiObjekat;
 import domen.Korisnik;
 
 /**
