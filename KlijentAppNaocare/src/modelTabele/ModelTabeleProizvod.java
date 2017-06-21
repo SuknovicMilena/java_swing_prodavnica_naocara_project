@@ -135,13 +135,13 @@ public class ModelTabeleProizvod extends AbstractTableModel {
         return null;
     }
 
-    public void izmeniProizvod(Proizvod p) {
-        Proizvod proizvod = null;
-        for (int i = 0; i < proizvodi.size(); i++) {
-            proizvod = proizvodi.get(i);
-        }
-        proizvodi.set(proizvod.getProizvodId(), p);
-        fireTableDataChanged();
-
-    }
+//    public void izmeniProizvod(Proizvod p) {
+//        Proizvod proizvod = null;
+//        for (int i = 0; i < proizvodi.size(); i++) {
+//            proizvod = proizvodi.get(i);
+//        }
+//        proizvodi.set(proizvod.getProizvodId(), p);
+//        fireTableDataChanged();
+//
+//    }
 }

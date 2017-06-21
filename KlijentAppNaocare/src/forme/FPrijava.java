@@ -152,7 +152,9 @@ public class FPrijava extends javax.swing.JFrame {
 
         FGlavna fglavna = new FGlavna();
         fglavna.prikaziSat();
+        JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili na sistem.");
         fglavna.setVisible(true);
+        fglavna.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jbtnPotvrdiPrijavuActionPerformed
 
@@ -160,6 +162,8 @@ public class FPrijava extends javax.swing.JFrame {
         // TODO add your handling code here:
         FRegistracija fregistracija = new FRegistracija();
         fregistracija.setVisible(true);
+        fregistracija.setLocationRelativeTo(null);
+        this.setVisible(false);
     }//GEN-LAST:event_jbtnRegistracijaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

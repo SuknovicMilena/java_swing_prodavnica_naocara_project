@@ -1,7 +1,6 @@
 package forme;
 
 import domen.Racun;
-import domen.StavkaRacuna;
 import javax.swing.JOptionPane;
 import klijentKontroler.KlijentKontroler;
 
@@ -42,7 +41,8 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
         jtfKorisnik = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Brisanje racuna");
 
         jLabel1.setText("Broj racuna");
 
@@ -51,6 +51,10 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
         jLabel3.setText("Ukupan iznos");
 
         jLabel4.setText("Korisnik");
+
+        jtfBrojRacuna.setEditable(false);
+
+        jtfDatumKupovine.setEditable(false);
 
         jButton1.setText("Obrisi racun");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,12 +76,15 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
                     .addComponent(jtfUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfDatumKupovine, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfKorisnik, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfBrojRacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +143,6 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
         } catch (Exception ex) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

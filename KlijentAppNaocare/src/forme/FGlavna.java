@@ -22,9 +22,12 @@ public class FGlavna extends javax.swing.JFrame {
     /**
      * Creates new form FGlavna
      */
+    Korisnik korisnik;
+
     public FGlavna() {
         initComponents();
-        jlUlogovaniKorisnik.setText("Trenutno prijavljeni korisnik je: " + " " + Session.getInstance().getLogovaniKorisnik());
+        korisnik = session.Session.getInstance().getLogovaniKorisnik();
+        jlUlogovaniKorisnik.setText("Trenutno prijavljeni korisnik je: " + " " + korisnik);
         jlUlogovaniKorisnik.setForeground(Color.GREEN);
     }
 
@@ -236,23 +239,27 @@ public class FGlavna extends javax.swing.JFrame {
 
         FRacun fracun = new FRacun(this, true);
         fracun.setVisible(true);
+        fracun.setLocationRelativeTo(null);
     }//GEN-LAST:event_jbtnNoviRacunActionPerformed
 
     private void jmRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRacunActionPerformed
         FRacun fracun = new FRacun(this, true);
         fracun.setVisible(true);
+        fracun.setLocationRelativeTo(null);
     }//GEN-LAST:event_jmRacunActionPerformed
 
     private void jMOautoruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMOautoruActionPerformed
         // TODO add your handling code here:
         FOAutoru oAutoru = new FOAutoru();
         oAutoru.setVisible(true);
+        oAutoru.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMOautoruActionPerformed
 
     private void jbtnIzlogujSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzlogujSeActionPerformed
         Session.getInstance().setLogovaniKorisnik(null);
         FPrijava fprijava = new FPrijava();
         fprijava.setVisible(true);
+        fprijava.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jbtnIzlogujSeActionPerformed
 
@@ -260,6 +267,7 @@ public class FGlavna extends javax.swing.JFrame {
         // TODO add your handling code here:
         FPretragaRacuna fp = new FPretragaRacuna();
         fp.setVisible(true);
+        fp.setLocationRelativeTo(null);
     }//GEN-LAST:event_jbtnPretragaRacunaActionPerformed
 
     public void prikaziSat() {

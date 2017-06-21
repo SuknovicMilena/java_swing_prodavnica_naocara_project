@@ -6,9 +6,7 @@
 package modelTabele;
 
 import domen.Korisnik;
-
 import domen.Racun;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

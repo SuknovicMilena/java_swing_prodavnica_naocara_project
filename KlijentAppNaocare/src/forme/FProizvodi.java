@@ -222,25 +222,27 @@ public class FProizvodi extends javax.swing.JDialog {
                 id = Integer.parseInt(proizvodId);
             } catch (NumberFormatException ex) {
             }
-            try {
-                int dialogButton = JOptionPane.YES_NO_OPTION;
-                int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da izmenite proizvod?", "Izmena proizvoda", dialogButton);
-                if (dialogResult == 0) {
 
-                    proizvod = new Proizvod(id, naziv, cena, boja, tip, proizvodjacCB);
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da izmenite proizvod?", "Izmena proizvoda", dialogButton);
+            if (dialogResult == 0) {
+                proizvod = new Proizvod(id, naziv, cena, boja, tip, proizvodjacCB);
+                try {
                     KlijentKontroler.getInstance().izmeniProizvod(proizvod);
-
                     FPretragaNaocara fp = (FPretragaNaocara) getParent();
                     modelTabele.ModelTabeleProizvod model = fp.vratiModel();
-                    model.izmeniProizvod(proizvod);
+//                    model.izmeni(proizvod, id );
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste izmenili proizvod!");
                     System.out.println("Da");
-                } else {
-                    System.out.println("Ne");
+                } catch (IOException ex) {
+                    Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ex) {
+
+            } else {
+                System.out.println("Ne");
             }
+
         }
     }//GEN-LAST:event_jBIzmeniActionPerformed
 
@@ -260,15 +262,16 @@ public class FProizvodi extends javax.swing.JDialog {
 
         proizvod = new Proizvod(id);
         try {
-
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da izbrišete  proizvod?", "Brisanje proizvoda", dialogButton);
+
             if (dialogResult == 0) {
                 KlijentKontroler.getInstance().obrisiProizvod(proizvod);
                 FPretragaNaocara fp = (FPretragaNaocara) getParent();
 
                 modelTabele.ModelTabeleProizvod model = fp.vratiModel();
                 model.obrisiProizvod(proizvod);
+                fp.setujPonovoModel(model);
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali proizvod!");
             } else {

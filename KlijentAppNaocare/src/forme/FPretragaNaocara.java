@@ -5,7 +5,7 @@
  */
 package forme;
 
-import domen.Korisnik;
+
 import domen.Proizvod;
 import domen.Proizvodjac;
 import java.io.IOException;
@@ -173,6 +173,7 @@ public class FPretragaNaocara extends javax.swing.JFrame {
 
             formaZaUnos.setTitle("Detalji proizvoda");
             formaZaUnos.setVisible(true);
+            formaZaUnos.setLocationRelativeTo(null);
 
         }
 

@@ -6,13 +6,11 @@
 package forme;
 
 import domen.Korisnik;
-import domen.Proizvod;
 import domen.Racun;
 import domen.StavkaRacuna;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelTabele.ModelTabeleProizvod;
 import modelTabele.ModelTabeleRacun;
 import modelTabele.ModelTabeleStavkaRacuna;
 
@@ -62,7 +60,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jList2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pretraga racuna");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -209,7 +207,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
 
         int sifra = jtableRacun.getSelectedRow();
         if (sifra < 0) {
-            JOptionPane.showMessageDialog(this, "Morate selektovati jedan red!");
+            JOptionPane.showMessageDialog(this, "Morate selektovati jedan red!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         ModelTabeleRacun mtp = (ModelTabeleRacun) jtableRacun.getModel();
@@ -242,6 +240,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             Racun r = mtp.vratiRacun(sifra);
             FPregledPojedinacnogRacuna fp = new FPregledPojedinacnogRacuna();
             fp.pogledajRacun(r);
+            fp.setLocationRelativeTo(null);
             fp.setVisible(true);
         }
 
@@ -259,6 +258,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             FStavkaRacuna izmena = new FStavkaRacuna(this, rootPaneCheckingEnabled);
             izmena.pogledajStavku(sr);
             izmena.setVisible(true);
+            izmena.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_jbtnBrisanjeStavkiActionPerformed
 

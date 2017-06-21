@@ -51,7 +51,7 @@ public class FRegistracija extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registracija");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Registracija na sistem"));
@@ -141,8 +141,13 @@ public class FRegistracija extends javax.swing.JFrame {
         String prezime = jtfPrezime.getText();
         String korisnickoIme = jtfKorisnickoIme.getText();
         String korisnickaSifra = jtfPass.getText();
+
         if (ime.isEmpty() || prezime.isEmpty() || korisnickoIme.isEmpty() || korisnickaSifra.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Niste se uspesno registrovali, pokusajte ponovo.", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (korisnickaSifra.length() < 4) {
+            JOptionPane.showMessageDialog(this, "Sifra mora da ima najmanje 4 karaktera.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
