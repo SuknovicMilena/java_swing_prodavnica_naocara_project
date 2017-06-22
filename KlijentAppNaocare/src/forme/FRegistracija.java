@@ -150,6 +150,10 @@ public class FRegistracija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sifra mora da ima najmanje 4 karaktera.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!korisnickaSifra.contains("@")) {
+            JOptionPane.showMessageDialog(this, "Sifra mora da sadrzi @ simbol.", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Korisnik korisnik = new Korisnik(ime, prezime, korisnickoIme, korisnickaSifra);
         try {
@@ -161,6 +165,8 @@ public class FRegistracija extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Uspesno ste se registrovali na sistem.");
             fglavna.prikaziSat();
+            fglavna.postaviMeni();
+            fglavna.setTitle("Glavna forma");
             fglavna.setVisible(true);
 
             this.setVisible(false);

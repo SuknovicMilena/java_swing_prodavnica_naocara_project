@@ -5,8 +5,8 @@
  */
 package startKlijent;
 
+import forme.FIzborServera;
 import java.io.IOException;
-import klijent.klijentskiSoket.Klijent;
 
 /**
  *
@@ -15,8 +15,11 @@ import klijent.klijentskiSoket.Klijent;
 public class KlijentApp {
 
     public static void main(String[] args) throws IOException {
-        Klijent klijent = new Klijent();
-        klijent.poveziSeSaServerom();
+//        Klijent klijent = new Klijent();
+//        klijent.poveziSeSaServerom();
+        FIzborServera izbor = new FIzborServera();
+        izbor.setVisible(true);
+        izbor.setLocationRelativeTo(null);
 
     }
 

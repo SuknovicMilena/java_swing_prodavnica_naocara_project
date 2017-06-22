@@ -190,6 +190,7 @@ public class FProizvodi extends javax.swing.JDialog {
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception ex) {
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(rootPane, "Niste uspesno sacuvali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
                 System.out.println("Da");
             } else {
@@ -229,13 +230,14 @@ public class FProizvodi extends javax.swing.JDialog {
                 proizvod = new Proizvod(id, naziv, cena, boja, tip, proizvodjacCB);
                 try {
                     KlijentKontroler.getInstance().izmeniProizvod(proizvod);
-                    FPretragaNaocara fp = (FPretragaNaocara) getParent();
-                    modelTabele.ModelTabeleProizvod model = fp.vratiModel();
-//                    model.izmeni(proizvod, id );
+//                    FPretragaNaocara fp = (FPretragaNaocara) getParent();
+//                    modelTabele.ModelTabeleProizvod model = fp.vratiModel();
+////                    model.izmeni(proizvod, id );
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste izmenili proizvod!");
                     System.out.println("Da");
                 } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Niste uspesno izmenili proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
@@ -267,16 +269,15 @@ public class FProizvodi extends javax.swing.JDialog {
 
             if (dialogResult == 0) {
                 KlijentKontroler.getInstance().obrisiProizvod(proizvod);
-                FPretragaNaocara fp = (FPretragaNaocara) getParent();
-
-                modelTabele.ModelTabeleProizvod model = fp.vratiModel();
-                model.obrisiProizvod(proizvod);
-                fp.setujPonovoModel(model);
+                FPretragaNaocara fp1 = (FPretragaNaocara) getParent();
+                modelTabele.ModelTabeleProizvod model1 = fp1.vratiModel();
+                model1.obrisiProizvod(proizvod);
+                fp1.popuniTabeluProizvod();
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali proizvod!");
             } else {
                 System.out.println("Ne");
-                JOptionPane.showMessageDialog(rootPane, "Niste izbrisali proizvod!");
+                JOptionPane.showMessageDialog(rootPane, "Niste uspesno izbrisali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
         }
@@ -360,27 +361,33 @@ public class FProizvodi extends javax.swing.JDialog {
         }
 
         try {
+            for (int i = 0; i < cenaString.length(); i++) {
+                if (!Character.isDigit(i)) {
+                    jLErrorCena.setText("Cena mora da bude broj!");
+                    break;
+                }
+
+            }
             cena = Double.parseDouble(cenaString);
             if (cena == 0) {
                 jLErrorCena.setText("Cena mora da bude veca od 0!");
                 return false;
             }
-//                if (cena = "") {
-//                    jLErrorCena.setText("Cena mora da bude veca od 0!");
-//                    return;
-//                }
-        } catch (NumberFormatException ex) { // handle your exception
-
+        } catch (NumberFormatException ex) {
+            return false;
         }
 
-        if (boja.length() < 3) {
+        if (boja.length()
+                < 3) {
             jLBojaError.setText("Boja mora da ima najmanje 3 slova!");
             return false;
         }
-        if (boja == null) {
+        if (boja
+                == null) {
             jLErrorBoja.setText("Boja mora da bude uneta!");
             return false;
         }
+
         return true;
     }
 }

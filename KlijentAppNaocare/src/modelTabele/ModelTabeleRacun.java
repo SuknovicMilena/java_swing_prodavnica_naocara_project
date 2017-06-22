@@ -94,4 +94,5 @@ public class ModelTabeleRacun extends AbstractTableModel {
         }
         return null;
     }
+
 }

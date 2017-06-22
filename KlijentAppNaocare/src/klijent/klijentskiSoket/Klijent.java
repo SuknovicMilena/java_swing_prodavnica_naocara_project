@@ -5,7 +5,8 @@
  */
 package klijent.klijentskiSoket;
 
-import forme.FPrijava;
+import forme.FGlavna;
+
 import java.io.IOException;
 import java.net.Socket;
 import session.Session;
@@ -22,7 +23,7 @@ public class Klijent {
 
         Session.getInstance().setSocket(socket);
 
-        FPrijava fglavna = new FPrijava();
+        FGlavna fglavna = new FGlavna();
         fglavna.setVisible(true);
 
     }

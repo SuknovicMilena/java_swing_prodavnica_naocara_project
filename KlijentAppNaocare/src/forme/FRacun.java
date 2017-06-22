@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import klijentKontroler.KlijentKontroler;
 import modelTabele.ModelTabeleProizvod;
 import modelTabele.ModelTabeleStavkaRacuna;
@@ -98,13 +99,13 @@ public class FRacun extends javax.swing.JDialog {
 
         jtblStavkeRacuna.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Rb", "Broj racuna", "Iznos stavke", "Proizvod"
+                "Rb", "Iznos stavke", "Proizvod"
             }
         ));
         jScrollPane1.setViewportView(jtblStavkeRacuna);
@@ -336,8 +337,9 @@ public class FRacun extends javax.swing.JDialog {
 
         ModelTabeleProizvod mtp = (ModelTabeleProizvod) jtblProizvodi.getModel();
         Proizvod p = mtp.vratiProizvod(sifra);
+        Proizvodjac proizvodjac = mtp.vratiProizvodjacaZaProizvod(p);
 
-        prikaziProizvod(p);
+        prikaziProizvod(p, proizvodjac);
     }//GEN-LAST:event_jtblProizvodiMouseClicked
 
     private void jbtnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajActionPerformed
@@ -360,11 +362,13 @@ public class FRacun extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         Date date = null;
         try {
-            date = (Date) sdf.parse(jtxtDatumIzdavanja.getText());
+            date = (Date) sdf.parse(jtxtDatumIzdavanja.getText().trim());
         } catch (ParseException ex) {
-            Logger.getLogger(FRacun.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Datum nije u korektnom formatu!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         racun.setDatumKupovine(date);
+
         racun.setKorisnik(korisnik);
 
         String ukupanIznos = jtxtUkupanIznos.getText();
@@ -428,25 +432,30 @@ public class FRacun extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void srediFormu() {
-
-        ModelTabeleStavkaRacuna tmStavke = new ModelTabeleStavkaRacuna(new Racun());
+        List<Proizvod> listaProizvoda = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
+        ModelTabeleStavkaRacuna tmStavke = new ModelTabeleStavkaRacuna(new Racun(), listaProizvoda);
         jtblStavkeRacuna.setModel(tmStavke);
         List<Proizvodjac> listaProizvodjaca = klijentKontroler.KlijentKontroler.getInstance().vratiSveProizvodjace();
         ModelTabeleProizvod model = new ModelTabeleProizvod(klijentKontroler.KlijentKontroler.getInstance().vratiProizvode(), listaProizvodjaca);
         jtblProizvodi.setModel(model);
     }
 
-    private void prikaziProizvod(Proizvod p) {
+    private void prikaziProizvod(Proizvod p, Proizvodjac proizvodjac) {
         jtxtProizvodId.setText(p.getProizvodId() + "");
         jtxtNaziv.setText(p.getNazivProizvoda());
         jtxtCena.setText(p.getCena() + "");
         jtxtBoja.setText(p.getBoja());
         jtfTip.setText(p.getTip());
-        jtfProizvodjac.setText(p.getProizvodjac().getNaziv() + "");
+        jtfProizvodjac.setText(proizvodjac.getNaziv() + "");
 
     }
 
     public void postaviUlogovanogKorisnika(Korisnik korisnik) {
         jtfKorisnik.setText("" + korisnik);
+    }
+
+    private ModelTabeleProizvod vratiModel() {
+        ModelTabeleProizvod model = (ModelTabeleProizvod) jtblProizvodi.getModel();
+        return model;
     }
 }

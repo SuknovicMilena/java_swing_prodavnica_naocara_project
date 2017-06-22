@@ -6,6 +6,7 @@
 package modelTabele;
 
 import domen.Proizvod;
+
 import domen.Racun;
 import domen.StavkaRacuna;
 import java.util.List;
@@ -18,10 +19,12 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleStavkaRacuna extends AbstractTableModel {
 
     Racun racun;
-    String[] kolone = {"Rb", "Broj racuna", "Iznos stavke", "Proizvod"};
+    String[] kolone = {"Rb", "Iznos stavke", "Proizvod"};
+    List<Proizvod> listaProizvoda;
 
-    public ModelTabeleStavkaRacuna(Racun racun) {
+    public ModelTabeleStavkaRacuna(Racun racun, List<Proizvod> listaProizvoda) {
         this.racun = racun;
+        this.listaProizvoda = listaProizvoda;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return kolone.length;
     }
 
     @Override
@@ -43,12 +46,11 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 return stavkaRacuna.getRedniBrojStavke();
+
             case 1:
-                return stavkaRacuna.getRacun().getBrojRacuna();
-            case 2:
                 return stavkaRacuna.getIznosStavke();
-            case 3:
-                return stavkaRacuna.getProizvod().getProizvodId();
+            case 2:
+                return vratiProizvod(stavkaRacuna.getProizvod().getProizvodId());
 
             default:
                 return "N/A";
@@ -105,5 +107,14 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
     public void obrisiStavku(StavkaRacuna st) {
         racun.getStavkeRacuna().remove(st);
         fireTableDataChanged();
+    }
+
+    public Proizvod vratiProizvod(int sifra) {
+        for (Proizvod proizvod : listaProizvoda) {
+            if (proizvod.getProizvodId() == sifra) {
+                return proizvod;
+            }
+        }
+        return null;
     }
 }

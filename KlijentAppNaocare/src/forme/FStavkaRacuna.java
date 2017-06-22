@@ -136,6 +136,7 @@ public class FStavkaRacuna extends javax.swing.JDialog {
 
                 modelTabele.ModelTabeleStavkaRacuna model = fpr.vratiModel();
                 model.obrisiStavku(st);
+
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali stavku racuna!");
             } else {

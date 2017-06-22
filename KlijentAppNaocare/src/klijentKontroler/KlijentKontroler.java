@@ -223,7 +223,7 @@ public class KlijentKontroler {
             ResponseObject answer = Session.getInstance().recieve();
             String message = (String) answer.getMessage();
 
-            JOptionPane.showMessageDialog(null, message);
+//            JOptionPane.showMessageDialog(null, message);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KlijentKontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -291,7 +291,7 @@ public class KlijentKontroler {
             ResponseObject answer = Session.getInstance().recieve();
             String message = (String) answer.getMessage();
 
-            JOptionPane.showMessageDialog(null, message);
+//            JOptionPane.showMessageDialog(null, message);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KlijentKontroler.class.getName()).log(Level.SEVERE, null, ex);
         }

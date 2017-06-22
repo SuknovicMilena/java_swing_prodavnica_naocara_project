@@ -5,7 +5,6 @@
  */
 package forme;
 
-
 import domen.Proizvod;
 import domen.Proizvodjac;
 import java.io.IOException;

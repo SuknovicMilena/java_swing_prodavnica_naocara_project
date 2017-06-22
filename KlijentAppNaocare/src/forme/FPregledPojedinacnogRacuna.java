@@ -76,15 +76,12 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addComponent(jtfUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfDatumKupovine, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfKorisnik, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfBrojRacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,6 +131,7 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
 
                 modelTabele.ModelTabeleRacun model = fpr.vratiModelRacuna();
                 model.obrisiRacun(racun);
+                fpr.popuniTabeluRacuna();
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali  racun!");
             } else {
@@ -141,6 +139,7 @@ public class FPregledPojedinacnogRacuna extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Niste izbrisali  racun!");
             }
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

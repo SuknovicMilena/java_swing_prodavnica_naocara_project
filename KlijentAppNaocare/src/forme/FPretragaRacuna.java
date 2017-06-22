@@ -6,6 +6,7 @@
 package forme;
 
 import domen.Korisnik;
+import domen.Proizvod;
 import domen.Racun;
 import domen.StavkaRacuna;
 import java.util.ArrayList;
@@ -150,17 +151,13 @@ public class FPretragaRacuna extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbtnBrisanjeRacuna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnBrisanjeStavki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jbtnBrisanjeStavki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbtnBrisanjeRacuna, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(88, 88, 88)
                 .addComponent(jbtnBrisanjeRacuna)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnBrisanjeStavki)
@@ -221,8 +218,8 @@ public class FPretragaRacuna extends javax.swing.JFrame {
                 r.setStavkeRacuna(stavkeOdRacuna);
             }
         }
-
-        ModelTabeleStavkaRacuna mtsr = new ModelTabeleStavkaRacuna(r);
+        List<Proizvod> listaProizvoda = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
+        ModelTabeleStavkaRacuna mtsr = new ModelTabeleStavkaRacuna(r, listaProizvoda);
 
         jTableStavkeRacuna.setModel(mtsr);
 
@@ -243,7 +240,6 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             fp.setLocationRelativeTo(null);
             fp.setVisible(true);
         }
-
 
     }//GEN-LAST:event_jbtnBrisanjeRacunaActionPerformed
 
@@ -278,7 +274,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
     private javax.swing.JTable jtableRacun;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniTabeluRacuna() {
+    public void popuniTabeluRacuna() {
         List<Racun> racuni = klijentKontroler.KlijentKontroler.getInstance().vratiRacun();
         List<Korisnik> korisnici = klijentKontroler.KlijentKontroler.getInstance().vratiSveKorisnike();
         ModelTabeleRacun modelRacun = new ModelTabeleRacun(racuni, korisnici);
@@ -298,4 +294,5 @@ public class FPretragaRacuna extends javax.swing.JFrame {
         return model;
 
     }
+
 }

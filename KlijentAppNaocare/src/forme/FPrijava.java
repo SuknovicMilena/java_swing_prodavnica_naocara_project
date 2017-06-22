@@ -25,6 +25,7 @@ public class FPrijava extends javax.swing.JFrame {
 
     public FPrijava() {
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -153,6 +154,8 @@ public class FPrijava extends javax.swing.JFrame {
         FGlavna fglavna = new FGlavna();
         fglavna.prikaziSat();
         JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili na sistem.");
+        fglavna.postaviMeni();
+        fglavna.setTitle("Glavna forma");
         fglavna.setVisible(true);
         fglavna.setLocationRelativeTo(null);
         this.dispose();

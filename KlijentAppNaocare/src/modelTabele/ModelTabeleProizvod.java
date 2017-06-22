@@ -19,16 +19,11 @@ public class ModelTabeleProizvod extends AbstractTableModel {
     List<Proizvod> proizvodi;
     List<Proizvodjac> proizvodjaci;
 
-    String[] kolone = {"Naziv proizvoda", "Cena", "Boja", "Tip", "Proizvodjac"};
+    String[] kolone = {"Proizvod ID", "Naziv proizvoda", "Cena", "Boja", "Tip", "Proizvodjac"};
 
     public ModelTabeleProizvod(List<Proizvod> proizvodi, List<Proizvodjac> proizvodjaci) {
         this.proizvodi = proizvodi;
         this.proizvodjaci = proizvodjaci;
-    }
-
-    public void refresh(Object[][] objects) {
-        //make the changes to the table, then call fireTableChanged
-        fireTableChanged(null);
     }
 
     @Override
@@ -56,14 +51,16 @@ public class ModelTabeleProizvod extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                return proizvod.getNazivProizvoda();
+                return proizvod.getProizvodId();
             case 1:
-                return proizvod.getCena();
+                return proizvod.getNazivProizvoda();
             case 2:
-                return proizvod.getBoja();
+                return proizvod.getCena();
             case 3:
-                return proizvod.getTip();
+                return proizvod.getBoja();
             case 4:
+                return proizvod.getTip();
+            case 5:
                 return vratiNazivProizvodjaca(proizvod.getProizvodjac().getProizvodjacId());
             default:
                 return "N/A";
@@ -76,18 +73,21 @@ public class ModelTabeleProizvod extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                proizvod.setNazivProizvoda((String) aValue);
+                proizvod.setProizvodId((int) aValue);
                 break;
             case 1:
-                proizvod.setCena((Double) aValue);
+                proizvod.setNazivProizvoda((String) aValue);
                 break;
             case 2:
-                proizvod.setBoja((String) aValue);
+                proizvod.setCena((Double) aValue);
                 break;
             case 3:
-                proizvod.setTip((String) aValue);
+                proizvod.setBoja((String) aValue);
                 break;
             case 4:
+                proizvod.setTip((String) aValue);
+                break;
+            case 5:
                 proizvod.setProizvodjac((Proizvodjac) aValue);
 
         }
@@ -144,4 +144,13 @@ public class ModelTabeleProizvod extends AbstractTableModel {
 //        fireTableDataChanged();
 //
 //    }
+    public Proizvodjac vratiProizvodjacaZaProizvod(Proizvod p) {
+        for (Proizvodjac proizvodjac : proizvodjaci) {
+            if (proizvodjac.getProizvodjacId() == p.getProizvodjac().getProizvodjacId()) {
+                return proizvodjac;
+            }
+        }
+        return null;
+    }
+
 }
