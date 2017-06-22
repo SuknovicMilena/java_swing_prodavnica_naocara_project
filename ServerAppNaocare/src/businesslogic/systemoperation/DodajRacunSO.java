@@ -38,9 +38,9 @@ public class DodajRacunSO extends AbstractSystemOperation {
     protected void executeOperation(Object object) throws Exception {
 
         try {
-            racun = dBBroker.sacuvaj(racun);
+            racun = dBBroker.pamtiSlozeniSlog((Racun) object);
 
-            sacuvajStavke();
+//            sacuvajStavke();
             System.out.println("Izvrsava se SK1: Kreiranje novog racuna. ");
         } catch (Exception ex) {
             System.out.println("Greska kod cuvanja racuna");

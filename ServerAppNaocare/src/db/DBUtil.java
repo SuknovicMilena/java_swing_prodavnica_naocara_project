@@ -35,4 +35,17 @@ public class DBUtil {
     public String vratiSifru() {
         return properties.getProperty(KonekcioniString.PASSWORD);
     }
+
+    public String vratiSemu() {
+        return properties.getProperty(KonekcioniString.SEMA);
+    }
+
+    public String vratiIP() {
+        return properties.getProperty(KonekcioniString.IP);
+    }
+
+    public String vratiPort() {
+        return properties.getProperty(KonekcioniString.PORT);
+    }
+
 }

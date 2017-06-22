@@ -13,7 +13,7 @@ import businesslogic.systemoperation.IzmeniProizvodSO;
 import businesslogic.systemoperation.ObrisiProizvodSO;
 import businesslogic.systemoperation.ObrisiRacunSO;
 import businesslogic.systemoperation.ObrisiStavkuRacunaSO;
-import businesslogic.systemoperation.PrijaviKorisnikaSo;
+
 import businesslogic.systemoperation.RegistrovanjeKorisnikaSo;
 import businesslogic.systemoperation.VratiSveProizvodeSO;
 import businesslogic.systemoperation.VratiSveProizvodjaceSO;
@@ -121,18 +121,6 @@ public class Kontroler {
         DatabaseBroker dBBroker = new DatabaseBroker();
         AbstractSystemOperation so = new RegistrovanjeKorisnikaSo(dBBroker);
         so.execute(korisnik);
-
-    }
-
-    public List<Korisnik> vratiKorisnike() throws Exception {
-
-        try {
-            PrijaviKorisnikaSo so = new PrijaviKorisnikaSo(new DatabaseBroker());
-            so.execute(null);
-            return so.getKorisnici();
-        } catch (Exception ex) {
-            throw new Exception("Greska kod izvrsenja.");
-        }
 
     }
 

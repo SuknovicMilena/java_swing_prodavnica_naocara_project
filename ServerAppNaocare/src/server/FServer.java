@@ -22,10 +22,10 @@ import nitiServer.NitSat;
  * @author Milena
  */
 public class FServer extends javax.swing.JFrame {
-
+    
     NitPokretanjeServera server;
     ArrayList<Korisnik> listaPoslePretrage = new ArrayList<>();
-
+    
     public FServer() throws Exception {
         initComponents();
         NitSat nitSat = new NitSat(jtxtSat);
@@ -35,7 +35,7 @@ public class FServer extends javax.swing.JFrame {
         jlStanjeServera.setText("Server nije pokrenut!");
         jlStanjeServera.setForeground(Color.ORANGE);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,9 +62,8 @@ public class FServer extends javax.swing.JFrame {
         jbtnRegKorZaUklanjanje = new javax.swing.JButton();
         jtfRegKorZaUklanjanje = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jbtnPodesavanja = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Server");
@@ -113,7 +112,7 @@ public class FServer extends javax.swing.JFrame {
                     .addComponent(jbtnPokreniServer)
                     .addComponent(jbtnZaustaviServer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlStanjeServera, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addComponent(jlStanjeServera, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -239,12 +238,12 @@ public class FServer extends javax.swing.JFrame {
 
         jLabel3.setText("* Pretraga korisnika je po prezimenu");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
+        jbtnPodesavanja.setText("Podesavanja baze");
+        jbtnPodesavanja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPodesavanjaActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,27 +251,31 @@ public class FServer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtSat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(17, 17, 17)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtxtSat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addComponent(jbtnPodesavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jbtnPodesavanja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,9 +290,9 @@ public class FServer extends javax.swing.JFrame {
     private void jbtnPokreniServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPokreniServerActionPerformed
         // TODO add your handling code here:
         server = new NitPokretanjeServera(this);
-
+        
         server.start();
-
+        
         jlStanjeServera.setText("Server je pokrenut!");
         jlStanjeServera.setForeground(Color.GREEN);
         jbtnZaustaviServer.setVisible(true);
@@ -312,23 +315,23 @@ public class FServer extends javax.swing.JFrame {
 
         if (jtableRegistrovani.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(this, "Morate izabrati red u tabeli!");
-
+            
         } else {
             int index = jtableRegistrovani.getSelectedRow();
             try {
 //                Korisnik korisnik = kontroler.Kontroler.getInstance().vratiSveKorisnike().get(index);
                 Korisnik korisnik1 = listaPoslePretrage.get(index);
-
+                
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da obrisete korisnika?", "Brisanje korisnika", dialogButton);
                 if (dialogResult == 0) {
                     kontroler.Kontroler.getInstance().obrisiKorisnika(korisnik1);
                     ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtableRegistrovani.getModel();
-
+                    
                     mp.obrisiKorisnika(index);
-
+                    
                     jtableRegistrovani.setModel(mp);
-
+                    
                 }
             } catch (Exception ex) {
                 Logger.getLogger(FServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,9 +340,9 @@ public class FServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnUkloniRegistrovanogKorisnikaActionPerformed
 
     private void jbtnUkloniPrijavljenogKorisnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUkloniPrijavljenogKorisnikaActionPerformed
-
+        
         List<NitKlijent> listaNiti = server.getListaAktivnihKlijenata();
-
+        
         int brojReda = jtablePrijavljeniKorisnici.getSelectedRow();
         if (brojReda < 0) {
             JOptionPane.showMessageDialog(rootPane, "Morate izabrati red u tabeli!");
@@ -361,14 +364,14 @@ public class FServer extends javax.swing.JFrame {
         try {
             List<Korisnik> listaSvih = server.getListaKorisnika();
             listaPoslePretrage = new ArrayList<>();
-
+            
             for (Korisnik k : listaSvih) {
                 if (k.getPrezime().toLowerCase().startsWith(prezimeKorisnika) || k.getPrezime().startsWith(prezimeKorisnika)) {
                     listaPoslePretrage.add(k);
                 }
             }
             JOptionPane.showMessageDialog(this, "Pretraga je zavrsena!");
-
+            
             popuniTabeluSaPretragom(listaPoslePretrage);
         } catch (Exception ex) {
             System.out.println("Sistem ne moze da nadje korisnik  sa tim prezimenom!" + ex.getMessage());
@@ -381,6 +384,12 @@ public class FServer extends javax.swing.JFrame {
         uklanjanjeKorisnikaRegistrovanih();
     }//GEN-LAST:event_jbtnRegKorZaUklanjanjeActionPerformed
 
+    private void jbtnPodesavanjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPodesavanjaActionPerformed
+        FPodesavanja fp = new FPodesavanja();
+        fp.setVisible(true);
+        fp.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jbtnPodesavanjaActionPerformed
+    
     public void popuniTabeluKorisnici() throws Exception {
         List<Korisnik> listaKorisnika = kontroler.Kontroler.getInstance().vratiSveKorisnike();
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaKorisnika);
@@ -390,8 +399,6 @@ public class FServer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -400,6 +407,7 @@ public class FServer extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JButton jbtnPodesavanja;
     private javax.swing.JButton jbtnPokreniServer;
     private javax.swing.JButton jbtnPronadjiKorisnika;
     private javax.swing.JButton jbtnRegKorZaUklanjanje;
@@ -417,61 +425,59 @@ public class FServer extends javax.swing.JFrame {
     private void srediTabelu() {
         jtablePrijavljeniKorisnici.setModel(new ModelTabeleKorisnik(new ArrayList<Korisnik>()));
     }
-
+    
     public void dodajRedUTabeli(Korisnik k) {
         ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
         mp.dodajKorisnika(k);
         jtablePrijavljeniKorisnici.setModel(mp);
     }
-
+    
     private void osveziTabelu(int red) {
-
+        
         ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
-
+        
         mp.obrisiKorisnika(red);
         jtablePrijavljeniKorisnici.setModel(mp);
-
+        
     }
-
+    
     private void popuniTabeluSaPretragom(ArrayList<Korisnik> listaPoslePretrage) {
-
+        
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtablePrijavljeniKorisnici.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void popuniTabeluSaPretragomReg(ArrayList<Korisnik> listaPoslePretrage) throws Exception {
-
+        
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtableRegistrovani.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
-
+    
     public void uklanjanjeKorisnikaRegistrovanih() {
-
+        
         String prezimeKorisnika = jtfRegKorZaUklanjanje.getText();
         try {
             List<Korisnik> listaSvih = kontroler.Kontroler.getInstance().vratiSveKorisnike();
             listaPoslePretrage = new ArrayList<>();
-
+            
             for (Korisnik k : listaSvih) {
                 if (k.getPrezime().toLowerCase().startsWith(prezimeKorisnika) || k.getPrezime().startsWith(prezimeKorisnika)) {
                     listaPoslePretrage.add(k);
                 }
             }
             JOptionPane.showMessageDialog(this, "Pretraga je zavrsena!");
-
+            
             popuniTabeluSaPretragomReg(listaPoslePretrage);
         } catch (Exception ex) {
             System.out.println("Sistem ne moze da nadje korisnik  sa tim prezimenom!" + ex.getMessage());
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje korisnike sa tim vrednostima.", "Greska", JOptionPane.ERROR_MESSAGE);
         }
-
+        
     }
 }
