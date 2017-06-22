@@ -102,6 +102,11 @@ public class Proizvod implements Serializable, IDomenskiObjekat {
     }
 
     @Override
+    public String toString() {
+        return nazivProizvoda;
+    }
+
+    @Override
     public String vratiNazivTabele() {
         return "proizvod";
     }
@@ -175,6 +180,16 @@ public class Proizvod implements Serializable, IDomenskiObjekat {
 
     @Override
     public String vratiSlozeniPK() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int vratiBrojSlogovaVezanogObjekta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IDomenskiObjekat vratiSlogVezanogObjekta(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

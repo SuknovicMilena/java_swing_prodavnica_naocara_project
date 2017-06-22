@@ -33,4 +33,8 @@ public interface IDomenskiObjekat {
     public String vratiVrednostKoloneZaFiltriranje();
 
     public String vratiSlozeniPK();
+
+    public int vratiBrojSlogovaVezanogObjekta();
+
+    public IDomenskiObjekat vratiSlogVezanogObjekta(int i);
 }

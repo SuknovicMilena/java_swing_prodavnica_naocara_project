@@ -88,7 +88,7 @@ public class Racun implements Serializable, IDomenskiObjekat {
     public String vratiVrednostiZaInsert() {
         String datum = new SimpleDateFormat("dd.MM.yyyy").format(datumKupovine);
 
-        return " '" + datum + "'," + getUkupanIznos() + "," + getKorisnik().getKorisnikId() + "";
+        return " " + getBrojRacuna()+ " ,'" + datum + "'," + getUkupanIznos() + "," + getKorisnik().getKorisnikId() + "";
     }
 
     @Override
@@ -157,6 +157,16 @@ public class Racun implements Serializable, IDomenskiObjekat {
 
     @Override
     public String vratiSlozeniPK() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int vratiBrojSlogovaVezanogObjekta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IDomenskiObjekat vratiSlogVezanogObjekta(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

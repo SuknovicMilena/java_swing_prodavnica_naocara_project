@@ -150,4 +150,14 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
                 + " AND brojRacuna=" + racun.getBrojRacuna();
     }
 
+    @Override
+    public int vratiBrojSlogovaVezanogObjekta() {
+        return racun.getStavkeRacuna().size();
+    }
+
+    @Override
+    public IDomenskiObjekat vratiSlogVezanogObjekta(int i) {
+        return racun.getStavkeRacuna().get(i);
+    }
+
 }
