@@ -188,6 +188,11 @@ public class FGlavna extends javax.swing.JFrame {
         });
 
         jmiNoviRacun.setText("Novi racun");
+        jmiNoviRacun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNoviRacunActionPerformed(evt);
+            }
+        });
         jmRacun.add(jmiNoviRacun);
 
         jMenuBar1.add(jmRacun);
@@ -302,6 +307,12 @@ public class FGlavna extends javax.swing.JFrame {
         p.setVisible(true);
         p.setLocationRelativeTo(null);
     }//GEN-LAST:event_jbtnPrijaviSeActionPerformed
+
+    private void jmiNoviRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviRacunActionPerformed
+        FRacun fracun = new FRacun(this, true);
+        fracun.setVisible(true);
+        fracun.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jmiNoviRacunActionPerformed
 
     public void prikaziSat() {
 
