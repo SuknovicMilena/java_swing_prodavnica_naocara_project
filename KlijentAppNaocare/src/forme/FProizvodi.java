@@ -7,6 +7,7 @@ package forme;
 
 import domen.Proizvod;
 import domen.Proizvodjac;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -186,8 +187,6 @@ public class FProizvodi extends javax.swing.JDialog {
                     model.dodajProizvod(proizvod);
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste dodali novi proizvod!");
-                } catch (IOException ex) {
-                    Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception ex) {
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(rootPane, "Niste uspesno sacuvali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -195,6 +194,7 @@ public class FProizvodi extends javax.swing.JDialog {
                 System.out.println("Da");
             } else {
                 System.out.println("Ne");
+                JOptionPane.showMessageDialog(rootPane, "Niste uspesno sacuvali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -243,6 +243,7 @@ public class FProizvodi extends javax.swing.JDialog {
 
             } else {
                 System.out.println("Ne");
+                JOptionPane.showMessageDialog(rootPane, "Niste uspesno izmenili proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -280,6 +281,7 @@ public class FProizvodi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Niste uspesno izbrisali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jBObrisiActionPerformed
 

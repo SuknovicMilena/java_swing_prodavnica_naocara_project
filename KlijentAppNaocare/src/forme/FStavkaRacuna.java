@@ -144,6 +144,7 @@ public class FStavkaRacuna extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Niste izbrisali stavku racuna!");
             }
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
     }//GEN-LAST:event_jbtnBrisanjeStavkeActionPerformed

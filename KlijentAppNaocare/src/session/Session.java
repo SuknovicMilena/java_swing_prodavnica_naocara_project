@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import response.ResponseObject;
+import response.OdgovorObjekat;
 
 /**
  *
@@ -48,14 +48,14 @@ public class Session {
         this.logovaniKorisnik = logovaniKorisnik;
     }
 
-    public void send(request.RequestObject object) throws IOException {
+    public void send(request.ZahtevObjekat object) throws IOException {
         ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
         output.writeObject(object);
     }
 
-    public ResponseObject recieve() throws IOException, ClassNotFoundException {
+    public OdgovorObjekat recieve() throws IOException, ClassNotFoundException {
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-        return (ResponseObject) input.readObject();
+        return (OdgovorObjekat) input.readObject();
     }
 
 }
