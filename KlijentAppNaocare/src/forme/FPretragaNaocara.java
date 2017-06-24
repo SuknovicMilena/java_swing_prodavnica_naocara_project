@@ -20,6 +20,9 @@ import modelTabele.ModelTabeleProizvod;
  */
 public class FPretragaNaocara extends javax.swing.JFrame {
 
+    List<Proizvod> proizvodi;
+    List<Proizvodjac> proizvodjaci;
+
     /**
      * Creates new form FPretragaNaocara
      */
@@ -165,9 +168,9 @@ public class FPretragaNaocara extends javax.swing.JFrame {
 
         } else {
 
-            FProizvodi formaZaUnos = new FProizvodi(this, true);
             int index = jTProizvodi.getSelectedRow();
-            Proizvod proizvod = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode().get(index);
+            Proizvod proizvod = proizvodi.get(index);
+            FProizvodi formaZaUnos = new FProizvodi(this, true, proizvod);
             formaZaUnos.updateProizvod(proizvod);
 
             formaZaUnos.setTitle("Detalji proizvoda");
@@ -179,7 +182,9 @@ public class FPretragaNaocara extends javax.swing.JFrame {
     }//GEN-LAST:event_jBDetaljiActionPerformed
 
     private void jBDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDodajActionPerformed
-        FProizvodi fproizvodi = new FProizvodi(this, true);
+        int index = jTProizvodi.getSelectedRow();
+        Proizvod proizvod = proizvodi.get(index);
+        FProizvodi fproizvodi = new FProizvodi(this, true, proizvod);
         fproizvodi.setVisible(true);
         fproizvodi.setLocationRelativeTo(null);
     }//GEN-LAST:event_jBDodajActionPerformed
@@ -224,10 +229,10 @@ public class FPretragaNaocara extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     public void popuniTabeluProizvod() throws IOException, Exception {
-        List<Proizvodjac> listaProizvodjaca = klijentKontroler.KlijentKontroler.getInstance().vratiSveProizvodjace();
-        ModelTabeleProizvod model = new ModelTabeleProizvod(klijentKontroler.KlijentKontroler.getInstance().vratiProizvode(), listaProizvodjaca);
+        proizvodjaci = klijentKontroler.KlijentKontroler.getInstance().vratiSveProizvodjace();
+        proizvodi = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
+        ModelTabeleProizvod model = new ModelTabeleProizvod(proizvodi, proizvodjaci);
         jTProizvodi.setModel(model);
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

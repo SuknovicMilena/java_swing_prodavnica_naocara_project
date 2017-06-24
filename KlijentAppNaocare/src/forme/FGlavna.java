@@ -244,7 +244,7 @@ public class FGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSviProizvodiActionPerformed
 
     private void jBDodajNoviProizvodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDodajNoviProizvodActionPerformed
-        FProizvodi fproizvodi = new FProizvodi(null, true);
+        FProizvodi fproizvodi = new FProizvodi(null, true, null);
         fproizvodi.setVisible(true);
         fproizvodi.setLocationRelativeTo(null);
     }//GEN-LAST:event_jBDodajNoviProizvodActionPerformed

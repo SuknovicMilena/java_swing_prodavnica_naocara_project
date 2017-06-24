@@ -27,7 +27,7 @@ public class FProizvodi extends javax.swing.JDialog {
     String cenaString;
     double cena = 0;
 
-    public FProizvodi(java.awt.Frame parent, boolean modal) {
+    public FProizvodi(java.awt.Frame parent, boolean modal, Proizvod proizvod) {
 
         super(parent, modal);
         initComponents();
@@ -37,7 +37,7 @@ public class FProizvodi extends javax.swing.JDialog {
         jLProizvodID.setVisible(false);
         jBIzmeni.setVisible(false);
         jBObrisi.setVisible(false);
-
+        this.proizvod = proizvod;
     }
 
     /**
@@ -187,6 +187,7 @@ public class FProizvodi extends javax.swing.JDialog {
                     model.dodajProizvod(proizvod);
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste dodali novi proizvod!");
+                    this.dispose();
                 } catch (Exception ex) {
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(rootPane, "Niste uspesno sacuvali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -227,14 +228,21 @@ public class FProizvodi extends javax.swing.JDialog {
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da izmenite proizvod?", "Izmena proizvoda", dialogButton);
             if (dialogResult == 0) {
-                proizvod = new Proizvod(id, naziv, cena, boja, tip, proizvodjacCB);
+
+                proizvod.setNazivProizvoda(naziv);
+                proizvod.setCena(cena);
+                proizvod.setBoja(boja);
+                proizvod.setTip(tip);
+                proizvod.setProizvodjac(proizvodjacCB);
+
                 try {
                     KlijentKontroler.getInstance().izmeniProizvod(proizvod);
-//                    FPretragaNaocara fp = (FPretragaNaocara) getParent();
-//                    modelTabele.ModelTabeleProizvod model = fp.vratiModel();
-////                    model.izmeni(proizvod, id );
+                    FPretragaNaocara fp = (FPretragaNaocara) getParent();
+                    fp.vratiModel().fireTableDataChanged();
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste izmenili proizvod!");
+                    this.dispose();
+
                     System.out.println("Da");
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Niste uspesno izmenili proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -276,6 +284,7 @@ public class FProizvodi extends javax.swing.JDialog {
                 fp1.popuniTabeluProizvod();
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali proizvod!");
+                this.dispose();
             } else {
                 System.out.println("Ne");
                 JOptionPane.showMessageDialog(rootPane, "Niste uspesno izbrisali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
