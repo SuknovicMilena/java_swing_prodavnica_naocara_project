@@ -19,75 +19,75 @@ import java.util.logging.Logger;
  * @author Milena
  */
 public class Korisnik implements Serializable, IDomenskiObjekat {
-    
+
     private int korisnikId;
     private String ime;
     private String prezime;
     private String korisnickoIme;
     private String korisnickaSifra;
-    
+
     public Korisnik() {
     }
-    
+
     public Korisnik(String ime, String prezime) {
         this.ime = ime;
         this.prezime = prezime;
     }
-    
+
     public Korisnik(String ime, String prezime, String korisnickoIme, String korisnickaSifra) {
-        
+
         this.ime = ime;
         this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;
         this.korisnickaSifra = korisnickaSifra;
-        
+
     }
-    
+
     public int getKorisnikId() {
         return korisnikId;
     }
-    
+
     public void setKorisnikId(int korisnikId) {
         this.korisnikId = korisnikId;
     }
-    
+
     public String getIme() {
         return ime;
     }
-    
+
     public void setIme(String ime) {
         this.ime = ime;
     }
-    
+
     public String getPrezime() {
         return prezime;
     }
-    
+
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
-    
+
     public String getKorisnickoIme() {
         return korisnickoIme;
     }
-    
+
     public void setKorisnickoIme(String korisnickoIme) {
         this.korisnickoIme = korisnickoIme;
     }
-    
+
     public String getKorisnickaSifra() {
         return korisnickaSifra;
     }
-    
+
     public void setKorisnickaSifra(String korisnickaSifra) {
         this.korisnickaSifra = korisnickaSifra;
     }
-    
+
     @Override
     public String toString() {
         return ime + " " + prezime;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -105,37 +105,37 @@ public class Korisnik implements Serializable, IDomenskiObjekat {
         }
         return true;
     }
-    
+
     @Override
     public String vratiNazivTabele() {
         return "korisnik";
     }
-    
+
     @Override
     public String vratiVrednostiZaInsert() {
         return "   " + getKorisnikId() + ", '" + getIme() + "','" + getPrezime() + "','" + getKorisnickoIme() + "','"
                 + getKorisnickaSifra() + "'";
     }
-    
+
     @Override
     public List<IDomenskiObjekat> vratiListu(ResultSet rs) {
         List<IDomenskiObjekat> korisnici = new ArrayList<>();
-        
+
         try {
             while (rs.next()) {
                 Korisnik korisnik = new Korisnik();
-                
+
                 try {
                     korisnik.setKorisnikId(rs.getInt("korisnikId"));
                     korisnik.setIme(rs.getString("ime"));
                     korisnik.setPrezime(rs.getString("prezime"));
                     korisnik.setKorisnickoIme(rs.getString("korisnickoIme"));
-                    
+
                     korisnici.add(korisnik);
                 } catch (SQLException ex) {
                     Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
             System.out.println("Uspesno vraceni klijenti.");
         } catch (SQLException ex) {
@@ -146,25 +146,25 @@ public class Korisnik implements Serializable, IDomenskiObjekat {
         } catch (SQLException ex) {
             Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return korisnici;
     }
-    
+
     @Override
     public int vratiVrednostPK() {
         return korisnikId;
     }
-    
+
     @Override
     public String vratiPK() {
         return "korisnikId";
     }
-    
+
     @Override
     public String vratiVrednostiZaUpdate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public IDomenskiObjekat vratiObjekat(ResultSet rs) {
         try {
@@ -182,30 +182,30 @@ public class Korisnik implements Serializable, IDomenskiObjekat {
             return null;
         }
     }
-    
+
     @Override
     public String vratiKolonuZaFiltriranje() {
         return "korisnickoIme";
     }
-    
+
     @Override
     public String vratiVrednostKoloneZaFiltriranje() {
         return "korisnickoIme";
     }
-    
+
     @Override
     public String vratiSlozeniPK() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
-    
+
     @Override
     public int vratiBrojSlogovaVezanogObjekta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
-    
+
     @Override
     public IDomenskiObjekat vratiSlogVezanogObjekta(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
-    
+
 }
