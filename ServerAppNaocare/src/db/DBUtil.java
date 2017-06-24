@@ -54,12 +54,12 @@ public class DBUtil {
     }
 
     public void setKorisnikUserName(String value) {
-        properties.setProperty("username ", value);
+        properties.setProperty("username", value);
 
     }
 
     public void setSifruKorisnika(String value) {
-        properties.setProperty("password ", value);
+        properties.setProperty("password", value);
     }
 
     public void setSemu(String value) {
@@ -79,6 +79,7 @@ public class DBUtil {
         FileInputStream file = new FileInputStream("db.config");
 
         properties.load(file);
+        file.close();
     }
 
     public Properties getProperties() {

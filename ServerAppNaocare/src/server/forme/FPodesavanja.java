@@ -5,16 +5,11 @@
  */
 package server.forme;
 
-import db.DBUtil;
-import db.DatabaseBroker;
 import db.Konekcija;
-import java.awt.HeadlessException;
-import java.io.File;
+import db.KonekcioniString;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -193,7 +188,7 @@ public class FPodesavanja extends javax.swing.JFrame {
 
     private void jbtnUcitajParametreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUcitajParametreActionPerformed
         try {
-            Konekcija konekcija = new Konekcija();
+            Konekcija konekcija = Konekcija.vratiObjekat();
             String url = konekcija.getUrlPocetak();
             jtfUrl.setText(url);
             String ip = konekcija.getIp();
@@ -214,9 +209,11 @@ public class FPodesavanja extends javax.swing.JFrame {
     private void jbtnTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTestActionPerformed
         Konekcija konekcija = null;
         try {
-            konekcija = new Konekcija();
+            konekcija = Konekcija.vratiObjekat();
         } catch (SQLException | IOException ex) {
             Logger.getLogger(FPodesavanja.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Parametri nisu uspesno sacuvani!", "Greska!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         String urlPocetak = konekcija.getUrlPocetak();
         try {
@@ -224,7 +221,6 @@ public class FPodesavanja extends javax.swing.JFrame {
             String sifra = jtfKorSifra.getText();
             String url = urlPocetak + jtfIP.getText().trim() + ":" + jtfPort.getText().trim() + "/" + jtfSema.getText().trim();
 
-            konekcija = (Konekcija) DriverManager.getConnection(url, korisnickoIme, sifra);
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, "Test konekcije je uspesan. Zalis li da sacuvas podatke?", "Test", dialogButton);
             if (dialogResult == 0) {
@@ -268,8 +264,7 @@ public class FPodesavanja extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void sacuvaj() throws SQLException, IOException {
-        Konekcija konekcija = new Konekcija();
-        String prefix = konekcija.getUrlPocetak();
+        String prefix = jtfUrl.getText();
 
         String korisnickoIme = jtfKorIme1.getText().trim();
         String sifra = jtfKorSifra.getText();
@@ -278,25 +273,22 @@ public class FPodesavanja extends javax.swing.JFrame {
         String sema = jtfSema.getText().trim();
 
         try {
-            DBUtil dbUtil = new DBUtil();
-
-            Properties props = dbUtil.getProperties();
-
-            props.setProperty("url", prefix);
-            props.setProperty("username ", korisnickoIme);
-            props.setProperty("password ", sifra);
-            props.setProperty("ip", ip);
-            props.setProperty("port", port);
-            props.setProperty("sema", sema);
-            props.setProperty("url", prefix + ip + ":" + port + "/" + sema);
-            System.setProperties(props);
-
-            File f = new File("db.config");
-
-            OutputStream out = new FileOutputStream(f);
-            props.store(out, "Property fajl za cuvanje parametara za konekciju sa bazom!");
+            Properties props = new Properties();
+            FileInputStream in = new FileInputStream("db.config");
+            props.load(in);
+            
+            props.setProperty(KonekcioniString.URL, prefix);
+            props.setProperty(KonekcioniString.USERNAME, korisnickoIme);
+            props.setProperty(KonekcioniString.PASSWORD, sifra);
+            props.setProperty(KonekcioniString.IP, ip);
+            props.setProperty(KonekcioniString.PORT, port);
+            props.setProperty(KonekcioniString.SEMA, sema);
+            
+            FileOutputStream out = new FileOutputStream("db.config");
+            props.store(out, null);
+            Konekcija.vratiObjekat().getDbutil().setProperties(props);
             JOptionPane.showMessageDialog(this, "Parametri su uspesno sacuvani!");
-        } catch (IOException | HeadlessException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Parametri nisu uspesno sacuvani!");
         }
     }

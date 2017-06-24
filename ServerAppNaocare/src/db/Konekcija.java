@@ -34,7 +34,7 @@ public class Konekcija {
      * @throws SQLException
      * @throws IOException
      */
-    public Konekcija() throws SQLException, IOException {
+    private Konekcija() throws SQLException, IOException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -119,5 +119,12 @@ public class Konekcija {
     public void setUrl1(String url1) {
         this.url1 = url1;
     }
+    
+    public DBUtil getDbutil() {
+        return dbutil;
+    }
 
+    public void setDbutil(DBUtil dbutil) {
+        this.dbutil = dbutil;
+    }
 }

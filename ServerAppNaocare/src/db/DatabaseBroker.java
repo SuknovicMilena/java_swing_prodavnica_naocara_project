@@ -6,6 +6,8 @@
 package db;
 
 import domen.IDomenskiObjekat;
+import domen.Racun;
+import domen.StavkaRacuna;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -64,24 +66,31 @@ public class DatabaseBroker {
                     + " VALUES (" + odo.vratiVrednostiZaInsert() + ")";
             System.out.println(upit);
             st.execute(upit, Statement.RETURN_GENERATED_KEYS);
-            int insertedId = st.getGeneratedKeys().getInt("brojRacuna");
-            System.out.println(insertedId);
+            ResultSet rs = st.getGeneratedKeys();
+            int insertedId = 0;
+            while (rs.next()) {
+                insertedId = rs.getInt(1);
+            }
             st.close();
+            
+            Racun racun = (Racun)odo;
+            racun.setBrojRacuna(insertedId);
+            List<StavkaRacuna> stavke = racun.getStavkeRacuna();
 
-            IDomenskiObjekat vezo;
-            for (int i = 0; i < odo.vratiBrojSlogovaVezanogObjekta(); i++) {
+            for (StavkaRacuna stavka: stavke) {
+                stavka.getRacun().setBrojRacuna(insertedId);
+
                 st = konekcija.createStatement();
 
-                vezo = odo.vratiSlogVezanogObjekta(i);
-                upit = " INSERT INTO " + vezo.vratiNazivTabele()
-                        + " VALUES (" + vezo.vratiVrednostiZaInsert() + ")";
+                upit = " INSERT INTO " + stavka.vratiNazivTabele()
+                        + " VALUES (" + stavka.vratiVrednostiZaInsert() + ")";
                 System.out.println(upit);
-                st.executeUpdate(upit);
+                st.execute(upit);
             }
 
             st.close();
         } catch (SQLException esql) {
-            System.out.println(esql.getMessage());
+            Logger.getLogger(DatabaseBroker.class.getName()).log(Level.SEVERE, null, esql);
         }
         return odo;
     }
