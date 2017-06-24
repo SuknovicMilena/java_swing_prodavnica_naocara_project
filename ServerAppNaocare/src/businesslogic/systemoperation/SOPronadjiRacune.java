@@ -7,7 +7,7 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
-import domen.Korisnik;
+import domen.Racun;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  *
  * @author Milena
  */
-public class VratiSveKorisnikeSO extends AbstractSystemOperation {
+public class SOPronadjiRacune extends AbstractSystemOperation {
 
-    List<Korisnik> korisnici;
+    IDomenskiObjekat ido;
+    List<Racun> racuni = new ArrayList<>();
 
-    public VratiSveKorisnikeSO(DatabaseBroker dBBroker) {
+    public SOPronadjiRacune(DatabaseBroker dBBroker) {
         super(dBBroker);
-        korisnici = new ArrayList<>();
     }
 
     @Override
@@ -36,15 +36,16 @@ public class VratiSveKorisnikeSO extends AbstractSystemOperation {
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Korisnik());
+
+        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Racun());
         for (IDomenskiObjekat ido : idos) {
-            korisnici.add((Korisnik) ido);
+            racuni.add((Racun) ido);
         }
-        System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Pregled svih racuna.");
+
     }
 
-    public List<Korisnik> getKorisnici() {
-        return korisnici;
+    public List<Racun> getRacuni() {
+        return racuni;
     }
-
 }

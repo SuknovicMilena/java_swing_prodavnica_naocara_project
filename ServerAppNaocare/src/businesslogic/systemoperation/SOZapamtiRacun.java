@@ -16,11 +16,11 @@ import java.sql.SQLException;
  *
  * @author Milena
  */
-public class DodajRacunSO extends AbstractSystemOperation {
+public class SOZapamtiRacun extends AbstractSystemOperation {
 
     IDomenskiObjekat racun;
 
-    public DodajRacunSO(DatabaseBroker dBBroker) {
+    public SOZapamtiRacun(DatabaseBroker dBBroker) {
         super(dBBroker);
     }
 

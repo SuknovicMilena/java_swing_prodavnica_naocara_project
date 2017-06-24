@@ -7,43 +7,44 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
-import domen.Proizvod;
+import domen.Korisnik;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author student
+ * @author Milena
  */
-public class VratiSveProizvodeSO extends AbstractSystemOperation {
+public class SOVratiSveKorisnike extends AbstractSystemOperation {
 
-    private List<Proizvod> proizvodi;
+    List<Korisnik> korisnici;
 
-    public VratiSveProizvodeSO(DatabaseBroker dBBroker) {
+    public SOVratiSveKorisnike(DatabaseBroker dBBroker) {
         super(dBBroker);
-        proizvodi = new ArrayList<>();
+        korisnici = new ArrayList<>();
     }
 
     @Override
     protected void validate(Object object) throws Exception {
+
     }
 
     @Override
     protected void checkPreCondition(Object object) throws Exception {
+
     }
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-//        proizvodi = dBBroker.getAllProizvodi();
-        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Proizvod());
+        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Korisnik());
         for (IDomenskiObjekat ido : idos) {
-            proizvodi.add((Proizvod) ido);
+            korisnici.add((Korisnik) ido);
         }
-        System.out.println("Izvrsava se slucaj koriscenja: Pregled svih proizvoda. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika. ");
     }
 
-    public List<Proizvod> getProizvodi() {
-        return proizvodi;
+    public List<Korisnik> getKorisnici() {
+        return korisnici;
     }
 
 }

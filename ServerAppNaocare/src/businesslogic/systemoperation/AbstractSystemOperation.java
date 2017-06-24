@@ -7,10 +7,7 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 
-/**
- *
- * @author student
- */
+
 public abstract class AbstractSystemOperation {
 
     protected DatabaseBroker dBBroker;

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package server.forme;
 
+import server.forme.FPodesavanja;
 import domen.Korisnik;
 import java.awt.Color;
 import java.io.IOException;
@@ -16,16 +17,17 @@ import javax.swing.JOptionPane;
 import modelTabele.ModelTabeleKorisnik;
 import nitiServer.NitKlijent;
 import nitiServer.NitSat;
+import nitiServer.NitPokretanjeServera;
 
 /**
  *
  * @author Milena
  */
 public class FServer extends javax.swing.JFrame {
-    
+
     NitPokretanjeServera server;
     ArrayList<Korisnik> listaPoslePretrage = new ArrayList<>();
-    
+
     public FServer() throws Exception {
         initComponents();
         NitSat nitSat = new NitSat(jtxtSat);
@@ -35,7 +37,7 @@ public class FServer extends javax.swing.JFrame {
         jlStanjeServera.setText("Server nije pokrenut!");
         jlStanjeServera.setForeground(Color.ORANGE);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -290,9 +292,9 @@ public class FServer extends javax.swing.JFrame {
     private void jbtnPokreniServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPokreniServerActionPerformed
         // TODO add your handling code here:
         server = new NitPokretanjeServera(this);
-        
+
         server.start();
-        
+
         jlStanjeServera.setText("Server je pokrenut!");
         jlStanjeServera.setForeground(Color.GREEN);
         jbtnZaustaviServer.setVisible(true);
@@ -315,23 +317,23 @@ public class FServer extends javax.swing.JFrame {
 
         if (jtableRegistrovani.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(this, "Morate izabrati red u tabeli!");
-            
+
         } else {
             int index = jtableRegistrovani.getSelectedRow();
             try {
 //                Korisnik korisnik = kontroler.Kontroler.getInstance().vratiSveKorisnike().get(index);
                 Korisnik korisnik1 = listaPoslePretrage.get(index);
-                
+
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da obrisete korisnika?", "Brisanje korisnika", dialogButton);
                 if (dialogResult == 0) {
                     kontroler.Kontroler.getInstance().obrisiKorisnika(korisnik1);
                     ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtableRegistrovani.getModel();
-                    
+
                     mp.obrisiKorisnika(index);
-                    
+
                     jtableRegistrovani.setModel(mp);
-                    
+
                 }
             } catch (Exception ex) {
                 Logger.getLogger(FServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,9 +342,9 @@ public class FServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnUkloniRegistrovanogKorisnikaActionPerformed
 
     private void jbtnUkloniPrijavljenogKorisnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUkloniPrijavljenogKorisnikaActionPerformed
-        
+
         List<NitKlijent> listaNiti = server.getListaAktivnihKlijenata();
-        
+
         int brojReda = jtablePrijavljeniKorisnici.getSelectedRow();
         if (brojReda < 0) {
             JOptionPane.showMessageDialog(rootPane, "Morate izabrati red u tabeli!");
@@ -364,14 +366,14 @@ public class FServer extends javax.swing.JFrame {
         try {
             List<Korisnik> listaSvih = server.getListaKorisnika();
             listaPoslePretrage = new ArrayList<>();
-            
+
             for (Korisnik k : listaSvih) {
                 if (k.getPrezime().toLowerCase().startsWith(prezimeKorisnika) || k.getPrezime().startsWith(prezimeKorisnika)) {
                     listaPoslePretrage.add(k);
                 }
             }
             JOptionPane.showMessageDialog(this, "Pretraga je zavrsena!");
-            
+
             popuniTabeluSaPretragom(listaPoslePretrage);
         } catch (Exception ex) {
             System.out.println("Sistem ne moze da nadje korisnik  sa tim prezimenom!" + ex.getMessage());
@@ -389,7 +391,7 @@ public class FServer extends javax.swing.JFrame {
         fp.setVisible(true);
         fp.setLocationRelativeTo(null);
     }//GEN-LAST:event_jbtnPodesavanjaActionPerformed
-    
+
     public void popuniTabeluKorisnici() throws Exception {
         List<Korisnik> listaKorisnika = kontroler.Kontroler.getInstance().vratiSveKorisnike();
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaKorisnika);
@@ -425,59 +427,59 @@ public class FServer extends javax.swing.JFrame {
     private void srediTabelu() {
         jtablePrijavljeniKorisnici.setModel(new ModelTabeleKorisnik(new ArrayList<Korisnik>()));
     }
-    
+
     public void dodajRedUTabeli(Korisnik k) {
         ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
         mp.dodajKorisnika(k);
         jtablePrijavljeniKorisnici.setModel(mp);
     }
-    
+
     private void osveziTabelu(int red) {
-        
+
         ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
-        
+
         mp.obrisiKorisnika(red);
         jtablePrijavljeniKorisnici.setModel(mp);
-        
+
     }
-    
+
     private void popuniTabeluSaPretragom(ArrayList<Korisnik> listaPoslePretrage) {
-        
+
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtablePrijavljeniKorisnici.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void popuniTabeluSaPretragomReg(ArrayList<Korisnik> listaPoslePretrage) throws Exception {
-        
+
         ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtableRegistrovani.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void uklanjanjeKorisnikaRegistrovanih() {
-        
+
         String prezimeKorisnika = jtfRegKorZaUklanjanje.getText();
         try {
             List<Korisnik> listaSvih = kontroler.Kontroler.getInstance().vratiSveKorisnike();
             listaPoslePretrage = new ArrayList<>();
-            
+
             for (Korisnik k : listaSvih) {
                 if (k.getPrezime().toLowerCase().startsWith(prezimeKorisnika) || k.getPrezime().startsWith(prezimeKorisnika)) {
                     listaPoslePretrage.add(k);
                 }
             }
             JOptionPane.showMessageDialog(this, "Pretraga je zavrsena!");
-            
+
             popuniTabeluSaPretragomReg(listaPoslePretrage);
         } catch (Exception ex) {
             System.out.println("Sistem ne moze da nadje korisnik  sa tim prezimenom!" + ex.getMessage());
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje korisnike sa tim vrednostima.", "Greska", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 }

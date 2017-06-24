@@ -6,15 +6,15 @@
 package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
-import domen.Proizvod;
+import domen.StavkaRacuna;
 
 /**
  *
  * @author Milena
  */
-public class ObrisiProizvodSO extends AbstractSystemOperation {
+public class SOObrisiStavkuRacuna extends AbstractSystemOperation {
 
-    public ObrisiProizvodSO(DatabaseBroker dBBroker) {
+    public SOObrisiStavkuRacuna(DatabaseBroker dBBroker) {
         super(dBBroker);
     }
 
@@ -25,19 +25,18 @@ public class ObrisiProizvodSO extends AbstractSystemOperation {
 
     @Override
     protected void checkPreCondition(Object object) throws Exception {
-
     }
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-        Proizvod proizvodId = (Proizvod) object;
+        StavkaRacuna st = (StavkaRacuna) object;
 
         try {
-            dBBroker.obrisi(proizvodId);
-            System.out.println("Izvršava se slučaj korišćenja: Brisanje proizvoda");
+            dBBroker.obrisiSaSlozenimPK(st);
+            System.out.println("Izvršava se slučaj korišćenja: Brisanje stavke racuna");
         } catch (Exception ex) {
             System.out.println("Greska kod brisanja");
-            throw new Exception("Greska kod brisanja  proizvoda!");
+            throw new Exception("Greska kod brisanja  stavki racuna!");
         }
     }
 

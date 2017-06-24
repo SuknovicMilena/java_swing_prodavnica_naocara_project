@@ -5,23 +5,23 @@
  */
 package kontroler;
 
-import businesslogic.systemoperation.ObrisiKorisnikaSO;
+import businesslogic.systemoperation.SOObrisiKorisnika;
 import businesslogic.systemoperation.AbstractSystemOperation;
-import businesslogic.systemoperation.DodajRacunSO;
+import businesslogic.systemoperation.SOZapamtiRacun;
 import businesslogic.systemoperation.DodajStavkeRacuna;
-import businesslogic.systemoperation.IzmeniProizvodSO;
-import businesslogic.systemoperation.ObrisiProizvodSO;
-import businesslogic.systemoperation.ObrisiRacunSO;
-import businesslogic.systemoperation.ObrisiStavkuRacunaSO;
+import businesslogic.systemoperation.SOIzmeniProizvod;
+import businesslogic.systemoperation.SOObrisiProizvod;
+import businesslogic.systemoperation.SOObrisiRacun;
+import businesslogic.systemoperation.SOObrisiStavkuRacuna;
 
-import businesslogic.systemoperation.RegistrovanjeKorisnikaSo;
-import businesslogic.systemoperation.VratiSveProizvodeSO;
-import businesslogic.systemoperation.VratiSveProizvodjaceSO;
-import businesslogic.systemoperation.SacuvajProizvodSO;
-import businesslogic.systemoperation.VratiKorisnikaSO;
-import businesslogic.systemoperation.VratiSveRacuneSO;
-import businesslogic.systemoperation.VratiStavkeRacunaSO;
-import businesslogic.systemoperation.VratiSveKorisnikeSO;
+import businesslogic.systemoperation.SOZapamtiKorisnika;
+import businesslogic.systemoperation.SOVratiSveProizvode;
+import businesslogic.systemoperation.SOVratiSveProizvodjace;
+import businesslogic.systemoperation.SOSacuvajProizvod;
+import businesslogic.systemoperation.SOPrijaviKorisnika;
+import businesslogic.systemoperation.SOPronadjiRacune;
+import businesslogic.systemoperation.SOVratiStavkeRacuna;
+import businesslogic.systemoperation.SOVratiSveKorisnike;
 import db.DatabaseBroker;
 import domen.Korisnik;
 import domen.Proizvod;
@@ -54,7 +54,7 @@ public class Kontroler {
     public List<Proizvod> vratiProizvode() throws Exception {
 
         try {
-            VratiSveProizvodeSO so = new VratiSveProizvodeSO(new DatabaseBroker());
+            SOVratiSveProizvode so = new SOVratiSveProizvode(new DatabaseBroker());
             so.execute(null);
             return so.getProizvodi();
         } catch (Exception ex) {
@@ -66,7 +66,7 @@ public class Kontroler {
     public List<Proizvodjac> vratiProizvodjace() throws Exception {
 
         try {
-            VratiSveProizvodjaceSO so = new VratiSveProizvodjaceSO(new DatabaseBroker());
+            SOVratiSveProizvodjace so = new SOVratiSveProizvodjace(new DatabaseBroker());
             so.execute(null);
             return so.getProizvodjac();
         } catch (Exception ex) {
@@ -92,7 +92,7 @@ public class Kontroler {
 //    }
     public void dodajProizvod(Proizvod proizvod) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new SacuvajProizvodSO(dBBroker);
+        AbstractSystemOperation so = new SOSacuvajProizvod(dBBroker);
         so.execute(proizvod);
 
     }
@@ -100,26 +100,26 @@ public class Kontroler {
     public void sacuvajProizvode(List<Proizvod> proizvodi) throws Exception {
         // DBBroker.sacuvajPartnere(partneri);
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new SacuvajProizvodSO(dBBroker);
+        AbstractSystemOperation so = new SOSacuvajProizvod(dBBroker);
         so.execute(proizvodi);
     }
 
     public void izmeniProizvod(Proizvod proizvod) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new IzmeniProizvodSO(dBBroker);
+        AbstractSystemOperation so = new SOIzmeniProizvod(dBBroker);
         so.execute(proizvod);
     }
 
     public void obrisiProizvod(Proizvod selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new ObrisiProizvodSO(dBBroker);
+        AbstractSystemOperation so = new SOObrisiProizvod(dBBroker);
         so.execute(selektovaniRed);
 
     }
 
     public void registrujKorisnika(Korisnik korisnik) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new RegistrovanjeKorisnikaSo(dBBroker);
+        AbstractSystemOperation so = new SOZapamtiKorisnika(dBBroker);
         so.execute(korisnik);
 
     }
@@ -127,7 +127,7 @@ public class Kontroler {
     public List<Korisnik> vratiSveKorisnike() throws Exception {
 
         try {
-            VratiSveKorisnikeSO so = new VratiSveKorisnikeSO(new DatabaseBroker());
+            SOVratiSveKorisnike so = new SOVratiSveKorisnike(new DatabaseBroker());
             so.execute(null);
             return so.getKorisnici();
         } catch (Exception ex) {
@@ -146,7 +146,7 @@ public class Kontroler {
     public Korisnik vratiKorisnikaPoKorisnickomImenu(String korIme) throws Exception {
 
         try {
-            VratiKorisnikaSO so = new VratiKorisnikaSO(new DatabaseBroker());
+            SOPrijaviKorisnika so = new SOPrijaviKorisnika(new DatabaseBroker());
             so.execute(korIme);
             return so.getKorisnik();
         } catch (Exception ex) {
@@ -158,13 +158,13 @@ public class Kontroler {
     public void sacuvajRacun(Racun racun) throws Exception {
 
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new DodajRacunSO(dBBroker);
+        AbstractSystemOperation so = new SOZapamtiRacun(dBBroker);
         so.execute(racun);
     }
 
     public void obrisiKorisnika(Korisnik selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new ObrisiKorisnikaSO(dBBroker);
+        AbstractSystemOperation so = new SOObrisiKorisnika(dBBroker);
         so.execute(selektovaniRed);
 
     }
@@ -172,7 +172,7 @@ public class Kontroler {
     public List<Racun> vratiRacune() throws Exception {
 
         try {
-            VratiSveRacuneSO so = new VratiSveRacuneSO(new DatabaseBroker());
+            SOPronadjiRacune so = new SOPronadjiRacune(new DatabaseBroker());
             so.execute(null);
             return so.getRacuni();
         } catch (Exception ex) {
@@ -184,7 +184,7 @@ public class Kontroler {
     public List<StavkaRacuna> vratiStavkeRacuna() throws Exception {
 
         try {
-            VratiStavkeRacunaSO so = new VratiStavkeRacunaSO(new DatabaseBroker());
+            SOVratiStavkeRacuna so = new SOVratiStavkeRacuna(new DatabaseBroker());
             so.execute(null);
             return so.getStavkeRacuna();
         } catch (Exception ex) {
@@ -195,14 +195,14 @@ public class Kontroler {
 
     public void obrisiStavkuRacuna(StavkaRacuna selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new ObrisiStavkuRacunaSO(dBBroker);
+        AbstractSystemOperation so = new SOObrisiStavkuRacuna(dBBroker);
         so.execute(selektovaniRed);
 
     }
 
     public void obrisiRacun(Racun selektovaniRed) throws SQLException, IOException, Exception {
         DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new ObrisiRacunSO(dBBroker);
+        AbstractSystemOperation so = new SOObrisiRacun(dBBroker);
         so.execute(selektovaniRed);
 
     }

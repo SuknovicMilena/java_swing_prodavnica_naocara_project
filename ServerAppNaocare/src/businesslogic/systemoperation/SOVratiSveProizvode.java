@@ -7,43 +7,43 @@ package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
-import domen.StavkaRacuna;
+import domen.Proizvod;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Milena
+ * @author student
  */
-public class VratiStavkeRacunaSO extends AbstractSystemOperation {
+public class SOVratiSveProizvode extends AbstractSystemOperation {
 
-    List<StavkaRacuna> listaStavki = new ArrayList<>();
+    private List<Proizvod> proizvodi;
 
-    public VratiStavkeRacunaSO(DatabaseBroker dBBroker) {
+    public SOVratiSveProizvode(DatabaseBroker dBBroker) {
         super(dBBroker);
+        proizvodi = new ArrayList<>();
     }
 
     @Override
     protected void validate(Object object) throws Exception {
-
     }
 
     @Override
     protected void checkPreCondition(Object object) throws Exception {
-
     }
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new StavkaRacuna());
+//        proizvodi = dBBroker.getAllProizvodi();
+        List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Proizvod());
         for (IDomenskiObjekat ido : idos) {
-            listaStavki.add((StavkaRacuna) ido);
+            proizvodi.add((Proizvod) ido);
         }
-        System.out.println("Izvrsava se slucaj koriscenja: Pregled stavki racuna. ");
+        System.out.println("Izvrsava se slucaj koriscenja: Pregled svih proizvoda. ");
     }
 
-    public List<StavkaRacuna> getStavkeRacuna() {
-        return listaStavki;
+    public List<Proizvod> getProizvodi() {
+        return proizvodi;
     }
 
 }

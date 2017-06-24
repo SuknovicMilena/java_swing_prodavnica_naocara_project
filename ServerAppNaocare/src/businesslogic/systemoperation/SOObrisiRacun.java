@@ -6,21 +6,16 @@
 package businesslogic.systemoperation;
 
 import db.DatabaseBroker;
-import domen.IDomenskiObjekat;
-import domen.Korisnik;
+import domen.Racun;
 
 /**
  *
  * @author Milena
  */
-public class VratiKorisnikaSO extends AbstractSystemOperation {
+public class SOObrisiRacun extends AbstractSystemOperation {
 
-    Korisnik korisnik = new Korisnik();
-    IDomenskiObjekat idos;
-
-    public VratiKorisnikaSO(DatabaseBroker dBBroker) {
+    public SOObrisiRacun(DatabaseBroker dBBroker) {
         super(dBBroker);
-
     }
 
     @Override
@@ -35,12 +30,16 @@ public class VratiKorisnikaSO extends AbstractSystemOperation {
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-        String korIme = (String) object;
-        idos = dBBroker.vratiObjekatPoNekojKoloni(korisnik, korIme);
-        System.out.println("Izvrsava se slucaj koriscenja: Vracanje svih korisnika po nekom atributu. ");
+        Racun racun = (Racun) object;
+
+        try {
+            dBBroker.obrisi(racun);
+            System.out.println("Izvršava se slučaj korišćenja: Brisanje  racuna");
+        } catch (Exception ex) {
+            System.out.println("Greska kod brisanja");
+            throw new Exception("Greska kod brisanja racuna!"
+                    + "Morate izbrisati prvo sve stavke ovog racuna.");
+        }
     }
 
-    public Korisnik getKorisnik() {
-        return (Korisnik) idos;
-    }
 }

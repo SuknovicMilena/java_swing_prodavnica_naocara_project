@@ -5,7 +5,6 @@
  */
 package businesslogic.systemoperation;
 
-import businesslogic.systemoperation.AbstractSystemOperation;
 import db.DatabaseBroker;
 import domen.Korisnik;
 
@@ -13,9 +12,9 @@ import domen.Korisnik;
  *
  * @author Milena
  */
-public class ObrisiKorisnikaSO extends AbstractSystemOperation {
+public class SOZapamtiKorisnika extends AbstractSystemOperation {
 
-    public ObrisiKorisnikaSO(DatabaseBroker dBBroker) {
+    public SOZapamtiKorisnika(DatabaseBroker dBBroker) {
         super(dBBroker);
     }
 
@@ -31,14 +30,16 @@ public class ObrisiKorisnikaSO extends AbstractSystemOperation {
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-        Korisnik korisnikId = (Korisnik) object;
+        Korisnik korisnik = (Korisnik) object;
+
         try {
-            dBBroker.obrisi(korisnikId);
-            System.out.println("Izvršava se slučaj korišćenja: Brisanje korisnika");
+            dBBroker.sacuvaj(korisnik);
+            System.out.println("Izvrsava se SK1: Registrovanje  novog korisnika. ");
         } catch (Exception ex) {
-            System.out.println("Greska kod brisanja");
-            throw new Exception("Greska kod brisanja  korisnika!");
+            System.out.println("Greska kod registrovanja");
+            throw new Exception("Greska kod registrovanja  korisnika!");
         }
+
     }
 
 }

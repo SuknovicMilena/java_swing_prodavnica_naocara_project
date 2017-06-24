@@ -6,7 +6,6 @@
 package db;
 
 import domen.IDomenskiObjekat;
-import domen.Korisnik;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -98,8 +97,8 @@ public class DatabaseBroker {
             ResultSet rs = st.executeQuery(upit);
             lista = (ArrayList<IDomenskiObjekat>) odo.vratiListu(rs);
             st.close();
-        } catch (SQLException sQLException) {
-
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
 
         return lista.get(0);
@@ -117,8 +116,8 @@ public class DatabaseBroker {
             ResultSet rs = st.executeQuery(upit);
             obj = odo.vratiObjekat(rs);
             st.close();
-        } catch (SQLException sQLException) {
-
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
 
         return obj;
@@ -136,7 +135,8 @@ public class DatabaseBroker {
             System.out.println("PROMENI SLOG" + upit);
             st.executeUpdate(upit);
             st.close();
-        } catch (SQLException esql) {
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
 
         }
 

@@ -20,28 +20,35 @@ public class Konekcija {
 
     private static Konekcija objekat;
     private Connection konekcija;
-    String url;
+    String urlPocetak;
     String user;
     String password;
     String sema;
     String ip;
     String port;
     String url1;
+    DBUtil dbutil;
 
+    /**
+     *
+     * @throws SQLException
+     * @throws IOException
+     */
     public Konekcija() throws SQLException, IOException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DatabaseBroker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DBUtil dbutil = new DBUtil();
-        url = dbutil.vratiUrl();
+        dbutil = new DBUtil();
+        urlPocetak = dbutil.vratiUrl();
         user = dbutil.vratiKorisnika();
         password = dbutil.vratiSifru();
         sema = dbutil.vratiSemu();
         ip = dbutil.vratiIP();
         port = dbutil.vratiPort();
-        url1 = url + ip + ":" + port + "/" + sema;
+
+        url1 = urlPocetak + ip + ":" + port + "/" + sema;
         konekcija = DriverManager.getConnection(url1, user, password);
         konekcija.setAutoCommit(false);
     }
@@ -57,12 +64,12 @@ public class Konekcija {
         return objekat;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUrlPocetak() {
+        return urlPocetak;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrlPocetak(String urlPocetak) {
+        this.urlPocetak = urlPocetak;
     }
 
     public String getUser() {

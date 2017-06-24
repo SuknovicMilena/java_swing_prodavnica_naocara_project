@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package nitiServer;
 
+import server.forme.FServer;
 import domen.Korisnik;
 import java.io.IOException;
 import java.net.ServerSocket;

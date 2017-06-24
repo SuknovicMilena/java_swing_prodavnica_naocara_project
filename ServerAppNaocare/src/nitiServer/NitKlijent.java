@@ -21,12 +21,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import request.RequestObject;
-import response.ResponseObject;
-import server.FServer;
-import server.NitPokretanjeServera;
-import util.ActionCode;
-import util.EnumResponseStatus;
+import request.ZahtevObjekat;
+import response.OdgovorObjekat;
+import server.forme.FServer;
+import util.OdgovorStatus;
+import util.Operacije;
 
 /**
  *
@@ -65,83 +64,83 @@ public class NitKlijent extends Thread implements Serializable {
             System.out.println("Cekam zahtev klijenta");
             ObjectInputStream inSocket = new ObjectInputStream(socket.getInputStream());
             Object object = inSocket.readObject();
-            RequestObject requestObject = (RequestObject) object;
+            ZahtevObjekat requestObject = (ZahtevObjekat) object;
 
-            ResponseObject responseObject = obradiZahtev(requestObject);
+            OdgovorObjekat responseObject = obradiZahtev(requestObject);
             ObjectOutputStream outSocket = new ObjectOutputStream(socket.getOutputStream());
             outSocket.writeObject(responseObject);
             outSocket.flush();
         }
     }
 
-    private ResponseObject obradiZahtev(RequestObject requestObject) throws IOException {
-        ResponseObject responseObject = new ResponseObject();
+    private OdgovorObjekat obradiZahtev(ZahtevObjekat requestObject) throws IOException {
+        OdgovorObjekat responseObject = new OdgovorObjekat();
 
         int akcija = requestObject.getAction();
         switch (akcija) {
-            case ActionCode.VRATI_SVE_PROIZVODE:
+            case Operacije.VRATI_SVE_PROIZVODE:
 
                 try {
                     List<Proizvod> proizvodi = kontroler.Kontroler.getInstance().vratiProizvode();
                     responseObject.setResponse(proizvodi);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
 
                 } catch (Exception ex) {
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     responseObject.setMessage(ex.getMessage());
                 }
 
                 return responseObject;
-            case ActionCode.SACUVAJ_PROIZVOD:
+            case Operacije.SACUVAJ_PROIZVOD:
 
                 try {
 
                     Proizvod p = (Proizvod) requestObject.getParameter();
                     kontroler.Kontroler.getInstance().dodajProizvod(p);
 
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.VRATI_SVE_PROIZVODJACE:
+            case Operacije.VRATI_SVE_PROIZVODJACE:
                 try {
                     List<Proizvodjac> proizvodjaci = kontroler.Kontroler.getInstance().vratiProizvodjace();
                     responseObject.setResponse(proizvodjaci);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     responseObject.setMessage(ex.getMessage());
                 }
 
                 return responseObject;
-            case ActionCode.OBRISI_PROIZVOD:
+            case Operacije.OBRISI_PROIZVOD:
                 Proizvod proizvodId = (Proizvod) requestObject.getParameter();
 
                 try {
                     kontroler.Kontroler.getInstance().obrisiProizvod(proizvodId);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.IZMENI_PROIZVOD:
+            case Operacije.IZMENI_PROIZVOD:
 
                 try {
                     Proizvod p = (Proizvod) requestObject.getParameter();
                     kontroler.Kontroler.getInstance().izmeniProizvod(p);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.REGISTRUJ_KORISNIKA:
+            case Operacije.REGISTRUJ_KORISNIKA:
 
                 try {
 
@@ -152,10 +151,10 @@ public class NitKlijent extends Thread implements Serializable {
                     pokretanjeServeraNit.setListaKorisnika(korisniciNaServeru);
 
 //                    server.dodajRedUTabeli(korisnik);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
@@ -172,35 +171,35 @@ public class NitKlijent extends Thread implements Serializable {
 //                }
 //
 //                return responseObject;
-            case ActionCode.VRATI_SVE_KORISNIKE:
+            case Operacije.VRATI_SVE_KORISNIKE:
 
                 try {
                     korisnici = kontroler.Kontroler.getInstance().vratiSveKorisnike();
                     responseObject.setResponse(korisnici);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
 
                 } catch (Exception ex) {
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     responseObject.setMessage(ex.getMessage());
                 }
 
                 return responseObject;
-            case ActionCode.SACUVAJ_STAVKE_RACUNA:
+            case Operacije.SACUVAJ_STAVKE_RACUNA:
 
                 try {
 
                     StavkaRacuna sr = (StavkaRacuna) requestObject.getParameter();
                     kontroler.Kontroler.getInstance().sacuvajStavkeRacuna(sr);
 
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 return responseObject;
-            case ActionCode.VRATI_KORISNIKA_PO_KORISNICKOM_IMENU:
+            case Operacije.VRATI_KORISNIKA_PO_KORISNICKOM_IMENU:
 
                 try {
 
@@ -212,76 +211,76 @@ public class NitKlijent extends Thread implements Serializable {
                         server.dodajRedUTabeli(korisnik);
                     }
                     responseObject.setResponse(korisnik);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.SACUVAJ_RACUN:
+            case Operacije.SACUVAJ_RACUN:
 
                 try {
 
                     Racun racun = (Racun) requestObject.getParameter();
                     kontroler.Kontroler.getInstance().sacuvajRacun(racun);
 
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
 
-            case ActionCode.VRATI_STAVKE_RACUNA:
+            case Operacije.VRATI_STAVKE_RACUNA:
 
                 try {
                     List<StavkaRacuna> stavke = kontroler.Kontroler.getInstance().vratiStavkeRacuna();
                     responseObject.setResponse(stavke);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
 
                 } catch (Exception ex) {
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     responseObject.setMessage(ex.getMessage());
                 }
 
                 return responseObject;
-            case ActionCode.VRATI_SVE_RACUNE:
+            case Operacije.VRATI_SVE_RACUNE:
 
                 try {
 
                     List<Racun> racuni = kontroler.Kontroler.getInstance().vratiRacune();
 
                     responseObject.setResponse(racuni);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.BRISANJE_STAVKE_RACUNA:
+            case Operacije.BRISANJE_STAVKE_RACUNA:
                 StavkaRacuna st = (StavkaRacuna) requestObject.getParameter();
 
                 try {
                     kontroler.Kontroler.getInstance().obrisiStavkuRacuna(st);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
-            case ActionCode.BRISANJE_RACUNA:
+            case Operacije.BRISANJE_RACUNA:
                 Racun r = (Racun) requestObject.getParameter();
 
                 try {
                     kontroler.Kontroler.getInstance().obrisiRacun(r);
-                    responseObject.setResponseStatus(EnumResponseStatus.OK);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
                 } catch (Exception ex) {
                     responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(EnumResponseStatus.ERROR);
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;

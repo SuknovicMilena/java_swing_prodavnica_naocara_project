@@ -16,11 +16,11 @@ import java.util.Properties;
  */
 public class DBUtil {
 
-    private final Properties properties;
+    private Properties properties;
 
     public DBUtil() throws FileNotFoundException, IOException {
         properties = new Properties();
-        properties.load(new FileInputStream("db.config"));
+        ucitajProperti();
 
     }
 
@@ -46,6 +46,47 @@ public class DBUtil {
 
     public String vratiPort() {
         return properties.getProperty(KonekcioniString.PORT);
+    }
+
+    public void setUrl(String value) {
+        properties.setProperty("url", value);
+
+    }
+
+    public void setKorisnikUserName(String value) {
+        properties.setProperty("username ", value);
+
+    }
+
+    public void setSifruKorisnika(String value) {
+        properties.setProperty("password ", value);
+    }
+
+    public void setSemu(String value) {
+        properties.setProperty("sema", value);
+
+    }
+
+    public void setIP(String value) {
+        properties.setProperty("ip", value);
+    }
+
+    public void setPort(String value) {
+        properties.setProperty("port", value);
+    }
+
+    public void ucitajProperti() throws IOException {
+        FileInputStream file = new FileInputStream("db.config");
+
+        properties.load(file);
+    }
+
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
     }
 
 }
