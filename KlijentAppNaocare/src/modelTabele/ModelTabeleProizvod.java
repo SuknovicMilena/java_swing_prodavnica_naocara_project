@@ -26,6 +26,10 @@ public class ModelTabeleProizvod extends AbstractTableModel {
         this.proizvodjaci = proizvodjaci;
     }
 
+    public ModelTabeleProizvod(List<Proizvod> proizvodi) {
+        this.proizvodi = proizvodi;
+    }
+
     @Override
     public int getRowCount() {
         if (proizvodi == null) {
@@ -96,6 +100,10 @@ public class ModelTabeleProizvod extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return kolone[column];
+    }
+    
+    public List<Proizvod> getProizvodi() {
+        return proizvodi;
     }
 
     public void dodajProizvod(Proizvod proizvod) {

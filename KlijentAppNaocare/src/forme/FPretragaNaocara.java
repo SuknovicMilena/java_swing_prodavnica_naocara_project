@@ -22,6 +22,7 @@ public class FPretragaNaocara extends javax.swing.JFrame {
 
     List<Proizvod> proizvodi;
     List<Proizvodjac> proizvodjaci;
+    Proizvod proizvod;
 
     /**
      * Creates new form FPretragaNaocara
@@ -41,10 +42,6 @@ public class FPretragaNaocara extends javax.swing.JFrame {
         this.jTProizvodi = jTProizvodi;
     }
 
-//    FPretragaNaocara(Container parent, boolean b) throws Exception {
-//        initComponents();
-//        popuniTabeluProizvod();
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -169,22 +166,21 @@ public class FPretragaNaocara extends javax.swing.JFrame {
         } else {
 
             int index = jTProizvodi.getSelectedRow();
-            Proizvod proizvod = proizvodi.get(index);
+            ModelTabeleProizvod model = (ModelTabeleProizvod) jTProizvodi.getModel();
+            proizvod = model.getProizvodi().get(index);
             FProizvodi formaZaUnos = new FProizvodi(this, true, proizvod);
             formaZaUnos.updateProizvod(proizvod);
 
             formaZaUnos.setTitle("Detalji proizvoda");
             formaZaUnos.setVisible(true);
             formaZaUnos.setLocationRelativeTo(null);
-
         }
 
     }//GEN-LAST:event_jBDetaljiActionPerformed
 
     private void jBDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDodajActionPerformed
-        int index = jTProizvodi.getSelectedRow();
-        Proizvod proizvod = proizvodi.get(index);
-        FProizvodi fproizvodi = new FProizvodi(this, true, proizvod);
+
+        FProizvodi fproizvodi = new FProizvodi(this, true, null);
         fproizvodi.setVisible(true);
         fproizvodi.setLocationRelativeTo(null);
     }//GEN-LAST:event_jBDodajActionPerformed
@@ -207,32 +203,37 @@ public class FPretragaNaocara extends javax.swing.JFrame {
 
     private void jbtnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziActionPerformed
         // TODO add your handling code here:
-
+        ArrayList<Proizvod> listaPoslePretrage = new ArrayList<>();
         String nazivProizvoda = jtfPretraga.getText().trim();
         try {
-            List<Proizvod> listaSvihProizvoda = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
-            ArrayList<Proizvod> listaPoslePretrage = new ArrayList<>();
 
-            for (Proizvod p : listaSvihProizvoda) {
+            for (Proizvod p : proizvodi) {
                 if (p.getNazivProizvoda().toLowerCase().startsWith(nazivProizvoda) || p.getNazivProizvoda().startsWith(nazivProizvoda)) {
                     listaPoslePretrage.add(p);
+
                 }
             }
             JOptionPane.showMessageDialog(this, "Pretraga je zavrsena!");
 
             popuniTabeluSaPretragom(listaPoslePretrage);
+
         } catch (Exception ex) {
             System.out.println("Sistem ne moze da nadje proizvode  sa tim imenom!" + ex.getMessage());
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje korisnike  sa tim vrednostima", "Greska", JOptionPane.ERROR_MESSAGE);
         }
+
+        setVisible(true);
 
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     public void popuniTabeluProizvod() throws IOException, Exception {
         proizvodjaci = klijentKontroler.KlijentKontroler.getInstance().vratiSveProizvodjace();
         proizvodi = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
-        ModelTabeleProizvod model = new ModelTabeleProizvod(proizvodi, proizvodjaci);
-        jTProizvodi.setModel(model);
+
+        jTProizvodi.setModel(new ModelTabeleProizvod(proizvodi, proizvodjaci));
+        jTProizvodi.getColumnModel().getColumn(0).setMinWidth(0);
+        jTProizvodi.getColumnModel().getColumn(0).setMaxWidth(0);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,25 +248,28 @@ public class FPretragaNaocara extends javax.swing.JFrame {
     private javax.swing.JTextField jtfPretraga;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniTabeluSaPretragom(ArrayList<Proizvod> listaPoslePretrage) {
-        List<Proizvodjac> listaProizvodjaca = klijentKontroler.KlijentKontroler.getInstance().vratiSveProizvodjace();
-        ModelTabeleProizvod tmc = new ModelTabeleProizvod(listaPoslePretrage, listaProizvodjaca);
-        jTProizvodi.setModel(tmc);
+    private ModelTabeleProizvod popuniTabeluSaPretragom(ArrayList<Proizvod> listaPoslePretrage) {
+
+        ModelTabeleProizvod model = new ModelTabeleProizvod(listaPoslePretrage, proizvodjaci);
+
+        jTProizvodi.setModel(model);
+        jTProizvodi.repaint();
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadati proizvod", "Greska", JOptionPane.ERROR_MESSAGE);
         }
+        return model;
     }
 
     public ModelTabeleProizvod vratiModel() {
         ModelTabeleProizvod model = (ModelTabeleProizvod) jTProizvodi.getModel();
         return model;
-
     }
 
     public void setujPonovoModel(ModelTabeleProizvod model) {
-
         jTProizvodi.setModel(model);
-
     }
 
+    public JTable returnTable() {
+        return jTProizvodi;
+    }
 }

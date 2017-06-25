@@ -71,11 +71,7 @@ public class Proizvodjac implements Serializable, IDomenskiObjekat {
         return naziv;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        Proizvodjac p = (Proizvodjac) obj;
-//        return p.getNaziv().equals(getNaziv()) && p.getProizvodjacId() == getProizvodjacId();
-//    }
+
     @Override
     public String vratiNazivTabele() {
         return "proizvodjac";

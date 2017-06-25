@@ -40,23 +40,10 @@ public class SOZapamtiRacun extends AbstractSystemOperation {
         try {
             racun = dBBroker.pamtiSlozeniSlog((Racun) object);
 
-//            sacuvajStavke();
             System.out.println("Izvrsava se SK1: Kreiranje novog racuna. ");
         } catch (Exception ex) {
             System.out.println("Greska kod cuvanja racuna");
             throw new Exception("Greska kod cuvanja  racuna!");
-        }
-    }
-
-    private void sacuvajStavke() throws IOException {
-        Racun rac = (Racun) racun;
-        try {
-            for (StavkaRacuna stavka : rac.getStavkeRacuna()) {
-                stavka.setRacun(rac);
-                dBBroker.sacuvaj((IDomenskiObjekat) stavka);
-            }
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException.getMessage());
         }
     }
 

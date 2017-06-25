@@ -49,34 +49,170 @@ public class FProizvodi extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLTipProizvoda = new javax.swing.JLabel();
-        jBSacuvaj = new javax.swing.JButton();
         jLProizvodjac = new javax.swing.JLabel();
         jCBProizvodjac = new javax.swing.JComboBox<>();
         jCBTipoviProizvoda = new javax.swing.JComboBox<>();
-        jLNazivError = new javax.swing.JLabel();
-        jLCenaError = new javax.swing.JLabel();
-        jLBojaError = new javax.swing.JLabel();
-        jLNazivProizvoda = new javax.swing.JLabel();
-        jLCena = new javax.swing.JLabel();
         jLBoja = new javax.swing.JLabel();
-        jTNazivProizvoda = new javax.swing.JTextField();
-        jTCena = new javax.swing.JTextField();
         jTBoja = new javax.swing.JTextField();
-        jLErrorProizvod = new javax.swing.JLabel();
-        jLErrorCena = new javax.swing.JLabel();
-        jLErrorBoja = new javax.swing.JLabel();
-        jBIzmeni = new javax.swing.JButton();
+        jTCena = new javax.swing.JTextField();
+        jLCena = new javax.swing.JLabel();
+        jLNazivProizvoda = new javax.swing.JLabel();
+        jTNazivProizvoda = new javax.swing.JTextField();
         jLProizvodID = new javax.swing.JLabel();
         jTProizvodID = new javax.swing.JTextField();
+        jlNazivError = new javax.swing.JLabel();
+        jlBojaError = new javax.swing.JLabel();
+        jlCenaError = new javax.swing.JLabel();
+        jBIzmeni = new javax.swing.JButton();
         jBObrisi = new javax.swing.JButton();
+        jBSacuvaj = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje novih proizvoda");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Proizvod"));
+
         jLTipProizvoda.setText("Tip proizvoda");
-        getContentPane().add(jLTipProizvoda, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 340, 129, 23));
+
+        jLProizvodjac.setText("Proizvodjac");
+
+        jCBProizvodjac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBProizvodjacActionPerformed(evt);
+            }
+        });
+
+        jLBoja.setText("Boja");
+
+        jTCena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCenaActionPerformed(evt);
+            }
+        });
+
+        jLCena.setText("Cena");
+
+        jLNazivProizvoda.setText("Naziv proizvoda");
+
+        jTNazivProizvoda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNazivProizvodaActionPerformed(evt);
+            }
+        });
+
+        jLProizvodID.setText("Proizvod ID");
+
+        jTProizvodID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTProizvodIDActionPerformed(evt);
+            }
+        });
+
+        jlNazivError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlNazivError.setForeground(new java.awt.Color(255, 0, 0));
+
+        jlBojaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlBojaError.setForeground(new java.awt.Color(255, 0, 0));
+
+        jlCenaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlCenaError.setForeground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLProizvodID, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLNazivProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTCena, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTProizvodID, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTNazivProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlCenaError, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlNazivError, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlBojaError, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLProizvodjac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLCena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLTipProizvoda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(93, 93, 93)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCBProizvodjac, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBTipoviProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(284, 284, 284))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLProizvodID)
+                            .addComponent(jTProizvodID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLNazivProizvoda)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTNazivProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlNazivError, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLCena, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTCena, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlCenaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlBojaError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLTipProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBTipoviProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLProizvodjac)
+                    .addComponent(jCBProizvodjac, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(493, 493, 493))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 610, 310));
+
+        jBIzmeni.setText("Izmeni ");
+        jBIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBIzmeniActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBIzmeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 140, 31));
+
+        jBObrisi.setText("Obriši");
+        jBObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBObrisiActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 150, 31));
 
         jBSacuvaj.setText("Sačuvaj ");
         jBSacuvaj.setMaximumSize(new java.awt.Dimension(80, 30));
@@ -91,78 +227,7 @@ public class FProizvodi extends javax.swing.JDialog {
                 jBSacuvajActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSacuvaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 469, 165, 73));
-
-        jLProizvodjac.setText("Proizvodjac");
-        getContentPane().add(jLProizvodjac, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 414, 96, -1));
-
-        jCBProizvodjac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBProizvodjacActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCBProizvodjac, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 404, 247, 35));
-
-        getContentPane().add(jCBTipoviProizvoda, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 335, 247, 33));
-        getContentPane().add(jLNazivError, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 99, 89, 31));
-        getContentPane().add(jLCenaError, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 218, 104, 18));
-        getContentPane().add(jLBojaError, new org.netbeans.lib.awtextra.AbsoluteConstraints(876, 236, 89, 12));
-
-        jLNazivProizvoda.setText("Naziv proizvoda");
-        getContentPane().add(jLNazivProizvoda, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 58, -1, -1));
-
-        jLCena.setText("Cena");
-        getContentPane().add(jLCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 159, 78, 31));
-
-        jLBoja.setText("Boja");
-        getContentPane().add(jLBoja, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 232, 78, 30));
-
-        jTNazivProizvoda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTNazivProizvodaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTNazivProizvoda, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 51, 249, 30));
-        getContentPane().add(jTCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 160, 246, 30));
-        getContentPane().add(jTBoja, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 218, 249, 30));
-
-        jLErrorProizvod.setFont(new java.awt.Font("Dialog", 3, 11)); // NOI18N
-        jLErrorProizvod.setForeground(new java.awt.Color(204, 0, 0));
-        getContentPane().add(jLErrorProizvod, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 87, 345, 30));
-
-        jLErrorCena.setFont(new java.awt.Font("Dialog", 3, 11)); // NOI18N
-        jLErrorCena.setForeground(new java.awt.Color(204, 0, 0));
-        getContentPane().add(jLErrorCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 191, 335, 35));
-
-        jLErrorBoja.setFont(new java.awt.Font("Dialog", 3, 11)); // NOI18N
-        jLErrorBoja.setForeground(new java.awt.Color(204, 0, 0));
-        getContentPane().add(jLErrorBoja, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 268, 211, 38));
-
-        jBIzmeni.setText("Izmeni ");
-        jBIzmeni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBIzmeniActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBIzmeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 469, 177, 73));
-
-        jLProizvodID.setText("Proizvod ID");
-        getContentPane().add(jLProizvodID, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 8, 101, 25));
-
-        jTProizvodID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTProizvodIDActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTProizvodID, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 0, 249, 33));
-
-        jBObrisi.setText("Obriši");
-        jBObrisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBObrisiActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 470, 196, 72));
+        getContentPane().add(jBSacuvaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 120, 32));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,7 +253,7 @@ public class FProizvodi extends javax.swing.JDialog {
 
                     JOptionPane.showMessageDialog(rootPane, "Uspešno ste dodali novi proizvod!");
                     this.dispose();
-                } catch (Exception ex) {
+                } catch (HeadlessException | IOException ex) {
                     Logger.getLogger(FProizvodi.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(rootPane, "Niste uspesno sacuvali proizvod!", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
@@ -294,6 +359,10 @@ public class FProizvodi extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBObrisiActionPerformed
 
+    private void jTCenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCenaActionPerformed
+
     private void popuniCBProizvodjac() {
         jCBProizvodjac.removeAllItems();
         List<Proizvodjac> proizvodjaci = KlijentKontroler.getInstance().vratiSveProizvodjace();
@@ -337,65 +406,62 @@ public class FProizvodi extends javax.swing.JDialog {
     private javax.swing.JComboBox<Object> jCBProizvodjac;
     private javax.swing.JComboBox<String> jCBTipoviProizvoda;
     private javax.swing.JLabel jLBoja;
-    private javax.swing.JLabel jLBojaError;
     private javax.swing.JLabel jLCena;
-    private javax.swing.JLabel jLCenaError;
-    private javax.swing.JLabel jLErrorBoja;
-    private javax.swing.JLabel jLErrorCena;
-    private javax.swing.JLabel jLErrorProizvod;
-    private javax.swing.JLabel jLNazivError;
     private javax.swing.JLabel jLNazivProizvoda;
     private javax.swing.JLabel jLProizvodID;
     private javax.swing.JLabel jLProizvodjac;
     private javax.swing.JLabel jLTipProizvoda;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTBoja;
     private javax.swing.JTextField jTCena;
     private javax.swing.JTextField jTNazivProizvoda;
     private javax.swing.JTextField jTProizvodID;
+    private javax.swing.JLabel jlBojaError;
+    private javax.swing.JLabel jlCenaError;
+    private javax.swing.JLabel jlNazivError;
     // End of variables declaration//GEN-END:variables
          private boolean izvrsiValidaciju() {
 
         if (naziv.isEmpty() || cenaString.isEmpty() || boja.isEmpty()) {
-            jLErrorProizvod.setText("Naziv da bude unet!");
-            jLErrorBoja.setText("Boja mora da bude uneta!");
-            jLErrorCena.setText("Cena mora da bude uneta!");
+            jlNazivError.setText("Naziv da bude unet!");
+            jlBojaError.setText("Boja mora da bude uneta!");
+            jlCenaError.setText("Cena mora da bude uneta!");
             return false;
         }
 
         if (naziv.length() < 3) {
-            jLErrorProizvod.setText("Naziv mora da ima najmanje 3 slova!");
+            jlNazivError.setText("Naziv mora da ima najmanje 3 slova!");
             return false;
         }
         if (naziv == null) {
-            jLErrorProizvod.setText("Naziv da bude unet!");
+            jlNazivError.setText("Naziv da bude unet!");
             return false;
         }
 
         try {
             for (int i = 0; i < cenaString.length(); i++) {
                 if (!Character.isDigit(i)) {
-                    jLErrorCena.setText("Cena mora da bude broj!");
+                    jlCenaError.setText("Cena mora da bude broj!");
                     break;
                 }
 
             }
             cena = Double.parseDouble(cenaString);
             if (cena == 0) {
-                jLErrorCena.setText("Cena mora da bude veca od 0!");
+                jlCenaError.setText("Cena mora da bude veca od 0!");
                 return false;
             }
         } catch (NumberFormatException ex) {
             return false;
         }
 
-        if (boja.length()
-                < 3) {
-            jLBojaError.setText("Boja mora da ima najmanje 3 slova!");
+        if (boja.length() < 3) {
+            jlBojaError.setText("Boja mora da ima najmanje 3 slova!");
             return false;
         }
-        if (boja
-                == null) {
-            jLErrorBoja.setText("Boja mora da bude uneta!");
+        if (boja == null) {
+            jlBojaError.setText("Boja mora da bude uneta!");
             return false;
         }
 

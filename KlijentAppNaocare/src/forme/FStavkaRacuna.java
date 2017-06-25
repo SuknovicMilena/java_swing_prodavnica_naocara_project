@@ -5,6 +5,7 @@
  */
 package forme;
 
+import domen.Proizvod;
 import domen.Racun;
 import domen.StavkaRacuna;
 import javax.swing.JOptionPane;
@@ -16,15 +17,15 @@ import klijentKontroler.KlijentKontroler;
  */
 public class FStavkaRacuna extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FIzmenaStavkiRacuna
-     *
-     * @param parent
-     * @param modal
-     */
-    public FStavkaRacuna(java.awt.Frame parent, boolean modal) {
+    Racun racun;
+    StavkaRacuna st;
+
+    public FStavkaRacuna(java.awt.Frame parent, boolean modal, StavkaRacuna st) {
         super(parent, modal);
         initComponents();
+        this.st = st;
+        this.racun = racun;
+
     }
 
     @SuppressWarnings("unchecked")
@@ -117,28 +118,22 @@ public class FStavkaRacuna extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnBrisanjeStavkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBrisanjeStavkeActionPerformed
-        int redniBrojStavke = Integer.parseInt(jtfRbStavke.getText());
-        String brRac = jtfBrojRac.getText();
-        int brInt = Integer.parseInt(brRac);
-        StavkaRacuna st = new StavkaRacuna();
-        st.setRedniBrojStavke(redniBrojStavke);
-        Racun racun = new Racun();
-        racun.setBrojRacuna(brInt);
-        st.setRacun(racun);
 
         try {
 
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da izbrišete  stavku racuna?", "Brisanje stavki racuna", dialogButton);
             if (dialogResult == 0) {
+
                 KlijentKontroler.getInstance().obrisiStavkuRacuna(st);
                 FPretragaRacuna fpr = (FPretragaRacuna) getParent();
-
                 modelTabele.ModelTabeleStavkaRacuna model = fpr.vratiModel();
                 model.obrisiStavku(st);
 
+                model.fireTableDataChanged();
                 System.out.println("Da");
                 JOptionPane.showMessageDialog(rootPane, "Uspešno ste izbrisali stavku racuna!");
+                this.dispose();
             } else {
                 System.out.println("Ne");
                 JOptionPane.showMessageDialog(rootPane, "Niste izbrisali stavku racuna!");
@@ -146,7 +141,7 @@ public class FStavkaRacuna extends javax.swing.JDialog {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        this.dispose();
     }//GEN-LAST:event_jbtnBrisanjeStavkeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

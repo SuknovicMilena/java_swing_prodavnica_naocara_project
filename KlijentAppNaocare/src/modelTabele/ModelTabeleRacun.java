@@ -18,6 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleRacun extends AbstractTableModel {
 
     List<Racun> listaRacuna;
+
     List<Korisnik> listaKorisnika;
 
     public ModelTabeleRacun(List<Racun> listaRacuna, List<Korisnik> listaKorisnika) {
@@ -93,6 +94,10 @@ public class ModelTabeleRacun extends AbstractTableModel {
             }
         }
         return null;
+    }
+
+    public List<Racun> getListaRacuna() {
+        return listaRacuna;
     }
 
 }

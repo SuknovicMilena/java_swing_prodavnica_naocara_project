@@ -8,7 +8,6 @@ package kontroler;
 import businesslogic.systemoperation.SOObrisiKorisnika;
 import businesslogic.systemoperation.AbstractSystemOperation;
 import businesslogic.systemoperation.SOZapamtiRacun;
-import businesslogic.systemoperation.DodajStavkeRacuna;
 import businesslogic.systemoperation.SOIzmeniProizvod;
 import businesslogic.systemoperation.SOObrisiProizvod;
 import businesslogic.systemoperation.SOObrisiRacun;
@@ -134,13 +133,6 @@ public class Kontroler {
             throw new Exception("Greska kod izvrsenja.");
         }
 
-    }
-
-    public void sacuvajStavkeRacuna(StavkaRacuna sr) throws Exception {
-
-        DatabaseBroker dBBroker = new DatabaseBroker();
-        AbstractSystemOperation so = new DodajStavkeRacuna(dBBroker);
-        so.execute(sr);
     }
 
     public Korisnik vratiKorisnikaPoKorisnickomImenu(String korIme) throws Exception {

@@ -29,8 +29,7 @@ public class FGlavna extends javax.swing.JFrame {
         initComponents();
         srediMenu();
         jlUlogovaniKorisnik.setText("");
-//        korisnik = session.Session.getInstance().getLogovaniKorisnik();
-//        jlUlogovaniKorisnik.setText("Trenutno prijavljeni korisnik je: " + " " + korisnik);
+
         jlUlogovaniKorisnik.setForeground(Color.GREEN);
     }
 
@@ -244,6 +243,7 @@ public class FGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSviProizvodiActionPerformed
 
     private void jBDodajNoviProizvodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDodajNoviProizvodActionPerformed
+
         FProizvodi fproizvodi = new FProizvodi(null, true, null);
         fproizvodi.setVisible(true);
         fproizvodi.setLocationRelativeTo(null);
@@ -345,16 +345,16 @@ public class FGlavna extends javax.swing.JFrame {
     private void srediMenu() {
 
         if (korisnik == null) {
-            jMOAplikaciji.setEnabled(false);
-            jmRacun.setEnabled(false);
+            jMOAplikaciji.setVisible(false);
+            jmRacun.setVisible(false);
             jbtnNoviRacun.setVisible(false);
-            jMProizvodi.setEnabled(false);
+            jMProizvodi.setVisible(false);
             jbtnPretragaRacuna.setVisible(false);
             jBDodajNoviProizvod.setVisible(false);
             jBSviProizvodi.setVisible(false);
             jbtnIzlogujSe.setVisible(false);
 
-            this.setTitle("");
+            this.setTitle("Prijavite se ili registrujte na sistem...");
         }
 
     }
@@ -362,15 +362,16 @@ public class FGlavna extends javax.swing.JFrame {
     public void postaviMeni() {
 
         korisnik = session.Session.getInstance().getLogovaniKorisnik();
-        jmRacun.setEnabled(true);
-        jMOAplikaciji.setEnabled(true);
+        jmRacun.setVisible(true);
+        jMOAplikaciji.setVisible(true);
         jbtnNoviRacun.setVisible(true);
-        jMProizvodi.setEnabled(true);
+        jMProizvodi.setVisible(true);
         jbtnPretragaRacuna.setVisible(true);
         jBDodajNoviProizvod.setVisible(true);
         jBSviProizvodi.setVisible(true);
         jlUlogovaniKorisnik.setText("Trenutni korisnik je" + " " + korisnik + "");
         jbtnIzlogujSe.setVisible(true);
         jbtnPrijaviSe.setVisible(false);
+        this.setTitle("Glavna forma");
     }
 }

@@ -27,6 +27,9 @@ public class FServer extends javax.swing.JFrame {
 
     NitPokretanjeServera server;
     ArrayList<Korisnik> listaPoslePretrage = new ArrayList<>();
+    List<Korisnik> listaKorisnika;
+    ModelTabeleKorisnik model;
+    Korisnik korisnik;
 
     public FServer() throws Exception {
         initComponents();
@@ -266,7 +269,7 @@ public class FServer extends javax.swing.JFrame {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(133, 133, 133)
                         .addComponent(jbtnPodesavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -321,13 +324,17 @@ public class FServer extends javax.swing.JFrame {
         } else {
             int index = jtableRegistrovani.getSelectedRow();
             try {
-//                Korisnik korisnik = kontroler.Kontroler.getInstance().vratiSveKorisnike().get(index);
-                Korisnik korisnik1 = listaPoslePretrage.get(index);
+                if (listaPoslePretrage.isEmpty()) {
+                    korisnik = kontroler.Kontroler.getInstance().vratiSveKorisnike().get(index);
+                } else {
+                    korisnik = listaPoslePretrage.get(index);
+                }
 
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da obrisete korisnika?", "Brisanje korisnika", dialogButton);
                 if (dialogResult == 0) {
-                    kontroler.Kontroler.getInstance().obrisiKorisnika(korisnik1);
+
+                    kontroler.Kontroler.getInstance().obrisiKorisnika(korisnik);
                     ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtableRegistrovani.getModel();
 
                     mp.obrisiKorisnika(index);
@@ -393,8 +400,8 @@ public class FServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnPodesavanjaActionPerformed
 
     public void popuniTabeluKorisnici() throws Exception {
-        List<Korisnik> listaKorisnika = kontroler.Kontroler.getInstance().vratiSveKorisnike();
-        ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaKorisnika);
+        listaKorisnika = kontroler.Kontroler.getInstance().vratiSveKorisnike();
+        model = new ModelTabeleKorisnik(listaKorisnika);
         jtableRegistrovani.setModel(model);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -429,23 +436,23 @@ public class FServer extends javax.swing.JFrame {
     }
 
     public void dodajRedUTabeli(Korisnik k) {
-        ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
-        mp.dodajKorisnika(k);
-        jtablePrijavljeniKorisnici.setModel(mp);
+        model = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
+        model.dodajKorisnika(k);
+        jtablePrijavljeniKorisnici.setModel(model);
     }
 
     private void osveziTabelu(int red) {
 
-        ModelTabeleKorisnik mp = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
+        model = (ModelTabeleKorisnik) jtablePrijavljeniKorisnici.getModel();
 
-        mp.obrisiKorisnika(red);
-        jtablePrijavljeniKorisnici.setModel(mp);
+        model.obrisiKorisnika(red);
+        jtablePrijavljeniKorisnici.setModel(model);
 
     }
 
     private void popuniTabeluSaPretragom(ArrayList<Korisnik> listaPoslePretrage) {
 
-        ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
+        model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtablePrijavljeniKorisnici.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -454,7 +461,7 @@ public class FServer extends javax.swing.JFrame {
 
     private void popuniTabeluSaPretragomReg(ArrayList<Korisnik> listaPoslePretrage) throws Exception {
 
-        ModelTabeleKorisnik model = new ModelTabeleKorisnik(listaPoslePretrage);
+        model = new ModelTabeleKorisnik(listaPoslePretrage);
         jtableRegistrovani.setModel(model);
         if (listaPoslePretrage.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje zadatog korisnika", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -465,10 +472,10 @@ public class FServer extends javax.swing.JFrame {
 
         String prezimeKorisnika = jtfRegKorZaUklanjanje.getText();
         try {
-            List<Korisnik> listaSvih = kontroler.Kontroler.getInstance().vratiSveKorisnike();
+
             listaPoslePretrage = new ArrayList<>();
 
-            for (Korisnik k : listaSvih) {
+            for (Korisnik k : listaKorisnika) {
                 if (k.getPrezime().toLowerCase().startsWith(prezimeKorisnika) || k.getPrezime().startsWith(prezimeKorisnika)) {
                     listaPoslePretrage.add(k);
                 }

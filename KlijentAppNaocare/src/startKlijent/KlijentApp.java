@@ -15,8 +15,7 @@ import java.io.IOException;
 public class KlijentApp {
 
     public static void main(String[] args) throws IOException {
-//        Klijent klijent = new Klijent();
-//        klijent.poveziSeSaServerom();
+
         FIzborServera izbor = new FIzborServera();
         izbor.setVisible(true);
         izbor.setLocationRelativeTo(null);

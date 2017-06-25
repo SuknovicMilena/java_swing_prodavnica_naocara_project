@@ -184,21 +184,7 @@ public class NitKlijent extends Thread implements Serializable {
                 }
 
                 return responseObject;
-            case Operacije.SACUVAJ_STAVKE_RACUNA:
 
-                try {
-
-                    StavkaRacuna sr = (StavkaRacuna) requestObject.getParameter();
-                    kontroler.Kontroler.getInstance().sacuvajStavkeRacuna(sr);
-
-                    responseObject.setResponseStatus(OdgovorStatus.OK);
-                } catch (Exception ex) {
-                    responseObject.setMessage(ex.getMessage());
-                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
-                    Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                return responseObject;
             case Operacije.VRATI_KORISNIKA_PO_KORISNICKOM_IMENU:
 
                 try {

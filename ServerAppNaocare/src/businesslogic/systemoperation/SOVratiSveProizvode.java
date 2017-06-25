@@ -34,7 +34,7 @@ public class SOVratiSveProizvode extends AbstractSystemOperation {
 
     @Override
     protected void executeOperation(Object object) throws Exception {
-//        proizvodi = dBBroker.getAllProizvodi();
+
         List<IDomenskiObjekat> idos = dBBroker.vratiSve(new Proizvod());
         for (IDomenskiObjekat ido : idos) {
             proizvodi.add((Proizvod) ido);

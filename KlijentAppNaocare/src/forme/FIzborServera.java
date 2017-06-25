@@ -115,7 +115,7 @@ public class FIzborServera extends javax.swing.JFrame {
         System.out.println("Klijent se povezao sa serverom");
 
         Session.getInstance().setSocket(socket);
-        
+
         JOptionPane.showMessageDialog(this, "Uspesno ste se povezali sa serverom.");
 
         FGlavna fglavna = new FGlavna();

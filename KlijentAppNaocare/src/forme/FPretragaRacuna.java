@@ -24,6 +24,13 @@ public class FPretragaRacuna extends javax.swing.JFrame {
     /**
      * Creates new form FPretragaRacuna
      */
+    ModelTabeleRacun modelRacun;
+    ModelTabeleStavkaRacuna model;
+    List<Racun> racuni;
+    List<Korisnik> korisnici;
+    Racun r;
+    StavkaRacuna sr;
+
     public FPretragaRacuna() {
         initComponents();
         popuniTabeluRacuna();
@@ -207,8 +214,8 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Morate selektovati jedan red!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ModelTabeleRacun mtp = (ModelTabeleRacun) jtableRacun.getModel();
-        Racun r = mtp.vratiRacun(sifra);
+        modelRacun = (ModelTabeleRacun) jtableRacun.getModel();
+        r = modelRacun.vratiRacun(sifra);
 
         int brojRacuna = r.getBrojRacuna();
         for (StavkaRacuna stavkaRacuna : stavke) {
@@ -219,9 +226,9 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             }
         }
         List<Proizvod> listaProizvoda = klijentKontroler.KlijentKontroler.getInstance().vratiProizvode();
-        ModelTabeleStavkaRacuna mtsr = new ModelTabeleStavkaRacuna(r, listaProizvoda);
+        model = new ModelTabeleStavkaRacuna(r, listaProizvoda);
 
-        jTableStavkeRacuna.setModel(mtsr);
+        jTableStavkeRacuna.setModel(model);
 
     }//GEN-LAST:event_jtableRacunMouseClicked
 
@@ -233,9 +240,13 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Morate izabrati red u tabeli!", "Greska", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            ModelTabeleRacun mtp = (ModelTabeleRacun) jtableRacun.getModel();
-            Racun r = mtp.vratiRacun(sifra);
-            FPregledPojedinacnogRacuna fp = new FPregledPojedinacnogRacuna();
+            modelRacun = (ModelTabeleRacun) jtableRacun.getModel();
+            if (r.getStavkeRacuna().size() > 0) {
+                JOptionPane.showMessageDialog(this, "Mozete izbrisati samo racun sa predhodno uklonjenim stavkama!", "Greska", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            FPregledPojedinacnogRacuna fp = new FPregledPojedinacnogRacuna(this, true, r);
             fp.pogledajRacun(r);
             fp.setLocationRelativeTo(null);
             fp.setVisible(true);
@@ -249,9 +260,10 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Morate izabrati red u tabeli!", "Greska", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            ModelTabeleStavkaRacuna model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
-            StavkaRacuna sr = model.vratiStavku(sifra);
-            FStavkaRacuna izmena = new FStavkaRacuna(this, rootPaneCheckingEnabled);
+            model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
+            sr = model.vratiStavku(sifra);
+
+            FStavkaRacuna izmena = new FStavkaRacuna(this, true, sr);
             izmena.pogledajStavku(sr);
             izmena.setVisible(true);
             izmena.setLocationRelativeTo(null);
@@ -275,24 +287,21 @@ public class FPretragaRacuna extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void popuniTabeluRacuna() {
-        List<Racun> racuni = klijentKontroler.KlijentKontroler.getInstance().vratiRacun();
-        List<Korisnik> korisnici = klijentKontroler.KlijentKontroler.getInstance().vratiSveKorisnike();
-        ModelTabeleRacun modelRacun = new ModelTabeleRacun(racuni, korisnici);
-
+        racuni = klijentKontroler.KlijentKontroler.getInstance().vratiRacun();
+        korisnici = klijentKontroler.KlijentKontroler.getInstance().vratiSveKorisnike();
+        modelRacun = new ModelTabeleRacun(racuni, korisnici);
         jtableRacun.setModel(modelRacun);
-
     }
 
     public ModelTabeleStavkaRacuna vratiModel() {
-        ModelTabeleStavkaRacuna model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
+        model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
         return model;
-
     }
 
     public ModelTabeleRacun vratiModelRacuna() {
-        ModelTabeleRacun model = (ModelTabeleRacun) jtableRacun.getModel();
-        return model;
-
+        modelRacun = (ModelTabeleRacun) jtableRacun.getModel();
+        return modelRacun;
     }
 
+ 
 }

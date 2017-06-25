@@ -55,7 +55,6 @@
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
               </Border>
-              <Color PropertyName="color" blue="33" green="33" red="ff" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -75,21 +74,14 @@
                   </Group>
                   <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfKorIme" pref="187" max="32767" attributes="0"/>
-                              <Component id="jPassword" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jbtnRegistracija" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jbtnPotvrdiPrijavu" pref="185" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="jbtnRegistracija" pref="187" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jtfKorIme" pref="187" max="32767" attributes="0"/>
+                          <Component id="jPassword" max="32767" attributes="0"/>
+                          <Component id="jbtnPotvrdiPrijavu" alignment="0" pref="187" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,11 +98,11 @@
                       <Component id="jPassword" min="-2" max="-2" attributes="0"/>
                       <Component id="jlKorSifra" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
                   <Component id="jbtnPotvrdiPrijavu" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jbtnRegistracija" min="-2" pref="38" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
