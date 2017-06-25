@@ -27,9 +27,11 @@ public class Session {
             instance = new Session();
         }
         return instance;
+
     }
 
     private Session() {
+
     }
 
     public Socket getSocket() {

@@ -21,11 +21,14 @@ public class FIzborServera extends javax.swing.JFrame {
     /**
      * Creates new form FIzborServera
      */
+    Socket socket;
+
     public FIzborServera() {
         initComponents();
         System.out.println("Povezivanje je u toku...");
         jtfIpAdr.setText("localhost");
         jtfBrPorta.setText("9000");
+
     }
 
     /**
@@ -93,6 +96,7 @@ public class FIzborServera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnPoveziSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPoveziSeActionPerformed
+
         System.out.println("Povezivanje je u toku...");
 
         String ip = jtfIpAdr.getText();
@@ -101,17 +105,21 @@ public class FIzborServera extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Morate uneti sve trazene vrednosti kako bi se povezali sa serverom!", "Greska", JOptionPane.ERROR_MESSAGE);
         }
         int portInt = Integer.parseInt(port);
+
         try {
             poveziSeSaServerom(ip, portInt);
-            this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(FIzborServera.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(rootPane, "Server ne postoji!", "Greska", JOptionPane.ERROR_MESSAGE);
         }
+
+        this.setVisible(false);
+
     }//GEN-LAST:event_jbtnPoveziSeActionPerformed
 
     public void poveziSeSaServerom(String ipAdr, int brojPorta) throws IOException {
-        Socket socket = new Socket(ipAdr, brojPorta);
+
+        socket = new Socket(ipAdr, brojPorta);
+
         System.out.println("Klijent se povezao sa serverom");
 
         Session.getInstance().setSocket(socket);
@@ -121,7 +129,9 @@ public class FIzborServera extends javax.swing.JFrame {
         FGlavna fglavna = new FGlavna();
         fglavna.setVisible(true);
         fglavna.setLocationRelativeTo(null);
+
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -130,4 +140,5 @@ public class FIzborServera extends javax.swing.JFrame {
     private javax.swing.JTextField jtfBrPorta;
     private javax.swing.JTextField jtfIpAdr;
     // End of variables declaration//GEN-END:variables
+
 }

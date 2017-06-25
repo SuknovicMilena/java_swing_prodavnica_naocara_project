@@ -110,10 +110,8 @@
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLNazivProizvoda" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTNazivProizvoda" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="jlNazivError" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jlNazivError" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="jTNazivProizvoda" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -126,10 +124,12 @@
                       <Component id="jlCenaError" min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTBoja" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jLBoja" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jlBojaError" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTBoja" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLBoja" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

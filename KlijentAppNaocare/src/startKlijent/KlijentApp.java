@@ -6,7 +6,6 @@
 package startKlijent;
 
 import forme.FIzborServera;
-import java.io.IOException;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.io.IOException;
  */
 public class KlijentApp {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         FIzborServera izbor = new FIzborServera();
         izbor.setVisible(true);

@@ -243,10 +243,15 @@ public class FGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSviProizvodiActionPerformed
 
     private void jBDodajNoviProizvodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDodajNoviProizvodActionPerformed
+        try {
+            FPretragaNaocara fp = new FPretragaNaocara();
+            FProizvodi fproizvodi = new FProizvodi(fp, true, null);
+            fproizvodi.setVisible(true);
+            fproizvodi.setLocationRelativeTo(null);
+        } catch (Exception ex) {
+            Logger.getLogger(FGlavna.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        FProizvodi fproizvodi = new FProizvodi(null, true, null);
-        fproizvodi.setVisible(true);
-        fproizvodi.setLocationRelativeTo(null);
     }//GEN-LAST:event_jBDodajNoviProizvodActionPerformed
 
     private void jMProizvodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProizvodiActionPerformed

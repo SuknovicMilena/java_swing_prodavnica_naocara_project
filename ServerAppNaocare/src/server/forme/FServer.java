@@ -306,7 +306,7 @@ public class FServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnPokreniServerActionPerformed
 
     private void jbtnZaustaviServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnZaustaviServerActionPerformed
-        // TODO add your handling code here:
+       
         server.setSignal(false);
         jlStanjeServera.setText("Server je zaustavljen!");
         jlStanjeServera.setForeground(Color.RED);

@@ -171,9 +171,8 @@ public class FProizvodi extends javax.swing.JDialog {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLNazivProizvoda)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTNazivProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlNazivError, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jlNazivError, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTNazivProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,10 +180,11 @@ public class FProizvodi extends javax.swing.JDialog {
                         .addComponent(jTCena, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jlCenaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlBojaError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlBojaError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLBoja, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLTipProizvoda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,7 +235,7 @@ public class FProizvodi extends javax.swing.JDialog {
     private void jBSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSacuvajActionPerformed
 
         naziv = jTNazivProizvoda.getText();
-        cenaString = jTCena.getText();
+        cenaString = jTCena.getText().trim();
         boja = jTBoja.getText();
         String tip = jCBTipoviProizvoda.getSelectedItem().toString();
         Proizvodjac proizvodjacCB = (Proizvodjac) jCBProizvodjac.getSelectedItem();
@@ -277,7 +277,7 @@ public class FProizvodi extends javax.swing.JDialog {
     private void jBIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIzmeniActionPerformed
 
         naziv = jTNazivProizvoda.getText();
-        cenaString = jTCena.getText();
+        cenaString = jTCena.getText().trim();
         boja = jTBoja.getText();
         String tip = jCBTipoviProizvoda.getSelectedItem().toString();
         Proizvodjac proizvodjacCB = (Proizvodjac) jCBProizvodjac.getSelectedItem();
