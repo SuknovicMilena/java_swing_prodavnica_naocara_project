@@ -248,8 +248,9 @@ public class FPretragaRacuna extends javax.swing.JFrame {
 
             FPregledPojedinacnogRacuna fp = new FPregledPojedinacnogRacuna(this, true, r);
             fp.pogledajRacun(r);
-            fp.setLocationRelativeTo(null);
             fp.setVisible(true);
+            fp.setLocationRelativeTo(null);
+
         }
 
     }//GEN-LAST:event_jbtnBrisanjeRacunaActionPerformed
@@ -303,5 +304,4 @@ public class FPretragaRacuna extends javax.swing.JFrame {
         return modelRacun;
     }
 
- 
 }

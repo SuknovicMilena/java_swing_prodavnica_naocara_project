@@ -440,19 +440,17 @@ public class FProizvodi extends javax.swing.JDialog {
         }
 
         try {
-            for (int i = 0; i < cenaString.length(); i++) {
-                if (!Character.isDigit(i)) {
-                    jlCenaError.setText("Cena mora da bude broj!");
-                    break;
-                }
+//            for (int i = 0; i < cenaString.length(); i++) {
+//                if (!Character.isDigit(i)) {
+//                    jlCenaError.setText("Cena mora da bude broj!");
+//                    break;
+//                }
+//
+//            }
+            cena = Double.valueOf(cenaString);
 
-            }
-            cena = Double.parseDouble(cenaString);
-            if (cena == 0) {
-                jlCenaError.setText("Cena mora da bude veca od 0!");
-                return false;
-            }
         } catch (NumberFormatException ex) {
+            jlCenaError.setText("Cena mora da bude broj!");
             return false;
         }
 

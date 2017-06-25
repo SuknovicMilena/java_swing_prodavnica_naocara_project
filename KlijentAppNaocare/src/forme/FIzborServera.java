@@ -26,8 +26,6 @@ public class FIzborServera extends javax.swing.JFrame {
     public FIzborServera() {
         initComponents();
         System.out.println("Povezivanje je u toku...");
-        jtfIpAdr.setText("localhost");
-        jtfBrPorta.setText("9000");
 
     }
 
@@ -98,37 +96,42 @@ public class FIzborServera extends javax.swing.JFrame {
     private void jbtnPoveziSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPoveziSeActionPerformed
 
         System.out.println("Povezivanje je u toku...");
-
         String ip = jtfIpAdr.getText();
         String port = jtfBrPorta.getText();
         if (ip.isEmpty() || port.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Morate uneti sve trazene vrednosti kako bi se povezali sa serverom!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        int portInt = Integer.parseInt(port);
-
         try {
+            int portInt = Integer.parseInt(port);
             poveziSeSaServerom(ip, portInt);
-        } catch (IOException ex) {
-            Logger.getLogger(FIzborServera.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Neispravni parametri!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         this.setVisible(false);
 
     }//GEN-LAST:event_jbtnPoveziSeActionPerformed
 
-    public void poveziSeSaServerom(String ipAdr, int brojPorta) throws IOException {
+    public void poveziSeSaServerom(String ipAdr, int brojPorta) {
 
-        socket = new Socket(ipAdr, brojPorta);
+        try {
+            socket = new Socket(ipAdr, brojPorta);
 
-        System.out.println("Klijent se povezao sa serverom");
+            System.out.println("Klijent se povezao sa serverom");
 
-        Session.getInstance().setSocket(socket);
+            Session.getInstance().setSocket(socket);
 
-        JOptionPane.showMessageDialog(this, "Uspesno ste se povezali sa serverom.");
+            JOptionPane.showMessageDialog(this, "Uspesno ste se povezali sa serverom.");
 
-        FGlavna fglavna = new FGlavna();
-        fglavna.setVisible(true);
-        fglavna.setLocationRelativeTo(null);
+            FGlavna fglavna = new FGlavna();
+
+            fglavna.setVisible(true);
+            fglavna.setLocationRelativeTo(null);
+        } catch (IOException ex) {
+            Logger.getLogger(FIzborServera.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

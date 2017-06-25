@@ -152,8 +152,10 @@ public class FPrijava extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Uspesno ste se prijavili na sistem.");
         fglavna.postaviMeni();
         fglavna.setTitle("Glavna forma");
+        fglavna.setExtendedState(fglavna.getExtendedState() | fglavna.MAXIMIZED_BOTH);
         fglavna.setVisible(true);
         fglavna.setLocationRelativeTo(null);
+
         this.dispose();
     }//GEN-LAST:event_jbtnPotvrdiPrijavuActionPerformed
 

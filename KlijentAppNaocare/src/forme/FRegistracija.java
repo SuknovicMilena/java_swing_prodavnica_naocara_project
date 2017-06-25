@@ -175,6 +175,7 @@ public class FRegistracija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Uspesno ste se registrovali na sistem.");
             fglavna.prikaziSat();
             fglavna.postaviMeni();
+            fglavna.setExtendedState(fglavna.getExtendedState() | fglavna.MAXIMIZED_BOTH);
             fglavna.setTitle("Glavna forma");
             fglavna.setVisible(true);
 
