@@ -101,7 +101,7 @@ public class ModelTabeleProizvod extends AbstractTableModel {
     public String getColumnName(int column) {
         return kolone[column];
     }
-    
+
     public List<Proizvod> getProizvodi() {
         return proizvodi;
     }
@@ -143,15 +143,6 @@ public class ModelTabeleProizvod extends AbstractTableModel {
         return null;
     }
 
-//    public void izmeniProizvod(Proizvod p) {
-//        Proizvod proizvod = null;
-//        for (int i = 0; i < proizvodi.size(); i++) {
-//            proizvod = proizvodi.get(i);
-//        }
-//        proizvodi.set(proizvod.getProizvodId(), p);
-//        fireTableDataChanged();
-//
-//    }
     public Proizvodjac vratiProizvodjacaZaProizvod(Proizvod p) {
         for (Proizvodjac proizvodjac : proizvodjaci) {
             if (proizvodjac.getProizvodjacId() == p.getProizvodjac().getProizvodjacId()) {

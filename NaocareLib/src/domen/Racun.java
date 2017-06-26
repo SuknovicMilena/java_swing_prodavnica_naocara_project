@@ -24,8 +24,9 @@ public class Racun implements Serializable, IDomenskiObjekat {
     private int brojRacuna;
     private Date datumKupovine;
     private double ukupanIznos;
-    private List<StavkaRacuna> stavkeRacuna;
+
     private Korisnik korisnik;
+    private List<StavkaRacuna> stavkeRacuna;
 
     public Racun() {
         stavkeRacuna = new ArrayList<>();
@@ -93,7 +94,7 @@ public class Racun implements Serializable, IDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUpdate() {
-       return null;
+        return null;
     }
 
     @Override

@@ -270,6 +270,21 @@ public class NitKlijent extends Thread implements Serializable {
                     Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return responseObject;
+            case Operacije.VRATI_PROIZVOD:
+
+                try {
+
+                    int proizvod = (int) requestObject.getParameter();
+                    Proizvod proizvodID = kontroler.Kontroler.getInstance().vratiProizvod(proizvod);
+
+                    responseObject.setResponse(proizvodID);
+                    responseObject.setResponseStatus(OdgovorStatus.OK);
+                } catch (Exception ex) {
+                    responseObject.setMessage(ex.getMessage());
+                    responseObject.setResponseStatus(OdgovorStatus.ERROR);
+                    Logger.getLogger(NitPokretanjeServera.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return responseObject;
             default:
                 return responseObject;
 

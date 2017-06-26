@@ -9,8 +9,7 @@ import db.DatabaseBroker;
 import domen.IDomenskiObjekat;
 import domen.Racun;
 import domen.StavkaRacuna;
-import java.io.IOException;
-import java.sql.SQLException;
+
 
 /**
  *
@@ -37,14 +36,24 @@ public class SOZapamtiRacun extends AbstractSystemOperation {
     @Override
     protected void executeOperation(Object object) throws Exception {
 
-        try {
-            racun = dBBroker.pamtiSlozeniSlog((Racun) object);
+        if (object instanceof Racun) {
+            Racun racun = (Racun) object;
+            try {
+                racun.setBrojRacuna(0);
+                int racunId=dBBroker.sacuvajIVratiId(racun);
+                racun.setBrojRacuna(racunId);
+                for (StavkaRacuna sr : racun.getStavkeRacuna()) {
+                    sr.setRacun(racun);
+                    dBBroker.sacuvaj(sr);
+                }
 
-            System.out.println("Izvrsava se SK1: Kreiranje novog racuna. ");
-        } catch (Exception ex) {
-            System.out.println("Greska kod cuvanja racuna");
-            throw new Exception("Greska kod cuvanja  racuna!");
+                System.out.println("Izvrsava se SK1: Kreiranje novog racuna. ");
+            } catch (Exception ex) {
+                System.out.println("Greska kod cuvanja racuna");
+                throw new Exception("Greska kod cuvanja  racuna!");
+            }
         }
+
     }
 
 }

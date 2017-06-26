@@ -117,7 +117,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Redni broj stavke", "Broj racuna", "Iznos stavke", "Proizvod"
+                "Rb stavke", "Broj racuna", "Kolicna", "Cena", "Iznos stavke", "Proizvod"
             }
         ));
         jScrollPane2.setViewportView(jTableStavkeRacuna);
@@ -178,7 +178,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,6 +230,7 @@ public class FPretragaRacuna extends javax.swing.JFrame {
 
         jTableStavkeRacuna.setModel(model);
 
+
     }//GEN-LAST:event_jtableRacunMouseClicked
 
     private void jbtnBrisanjeRacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBrisanjeRacunaActionPerformed
@@ -263,9 +264,11 @@ public class FPretragaRacuna extends javax.swing.JFrame {
         } else {
             model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
             sr = model.vratiStavku(sifra);
+            int proizvodId = sr.getProizvod().getProizvodId();
+            Proizvod proizvod = klijentKontroler.KlijentKontroler.getInstance().vratiProizvod(proizvodId);
 
             FStavkaRacuna izmena = new FStavkaRacuna(this, true, sr);
-            izmena.pogledajStavku(sr);
+            izmena.pogledajStavku(sr, proizvod);
             izmena.setVisible(true);
             izmena.setLocationRelativeTo(null);
         }
@@ -295,7 +298,9 @@ public class FPretragaRacuna extends javax.swing.JFrame {
     }
 
     public ModelTabeleStavkaRacuna vratiModel() {
+
         model = (ModelTabeleStavkaRacuna) jTableStavkeRacuna.getModel();
+
         return model;
     }
 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,15 +24,17 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
     private int redniBrojStavke;
     private double iznosStavke;
     private Proizvod proizvod;
+    private int kolicina;
 
     public StavkaRacuna() {
     }
 
-    public StavkaRacuna(Racun racun, int redniBrojStavke, double iznosStavke, Proizvod proizvod) {
+    public StavkaRacuna(Racun racun, int redniBrojStavke, double iznosStavke, Proizvod proizvod, int kolicina) {
         this.racun = racun;
         this.redniBrojStavke = redniBrojStavke;
         this.iznosStavke = iznosStavke;
         this.proizvod = proizvod;
+        this.kolicina = kolicina;
     }
 
     public double getIznosStavke() {
@@ -74,12 +77,30 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
     @Override
     public String vratiVrednostiZaInsert() {
         return "" + getRedniBrojStavke() + "," + racun.getBrojRacuna() + ","
-                + getIznosStavke() + "," + getProizvod().getProizvodId() + "";
+                + (proizvod.getCena() * getKolicina()) + "," + getProizvod().getProizvodId() + "," + getKolicina() + "";
     }
 
     @Override
     public String vratiVrednostiZaUpdate() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StavkaRacuna other = (StavkaRacuna) obj;
+        if (!Objects.equals(this.proizvod.getProizvodId(), other.proizvod.getProizvodId())) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -98,11 +119,14 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
                 Racun racun = new Racun();
                 racun.setBrojRacuna(rs.getInt("brojRacuna"));
                 st.setRacun(racun);
+
                 st.setIznosStavke(rs.getDouble("iznosStavke"));
                 Proizvod proizvod = new Proizvod();
-                proizvod.setProizvodId(rs.getInt("proizvodId"));
-                st.setProizvod(proizvod);
 
+                proizvod.setProizvodId(rs.getInt("proizvodId"));
+
+                st.setProizvod(proizvod);
+                st.setKolicina(rs.getInt("kolicina"));
                 stavke.add(st);
 
             }
@@ -121,7 +145,7 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
 
     @Override
     public IDomenskiObjekat vratiObjekat(ResultSet rs) {
-      return null;
+        return null;
     }
 
     @Override
@@ -158,6 +182,14 @@ public class StavkaRacuna implements Serializable, IDomenskiObjekat {
     @Override
     public IDomenskiObjekat vratiSlogVezanogObjekta(int i) {
         return racun.getStavkeRacuna().get(i);
+    }
+
+    public int getKolicina() {
+        return kolicina;
+    }
+
+    public void setKolicina(int kolicina) {
+        this.kolicina = kolicina;
     }
 
 }

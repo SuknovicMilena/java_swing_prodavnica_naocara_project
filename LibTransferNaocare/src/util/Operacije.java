@@ -27,4 +27,5 @@ public interface Operacije {
     public static final int VRATI_STAVKE_RACUNA = 14;
     public static final int BRISANJE_STAVKE_RACUNA = 15;
     public static final int BRISANJE_RACUNA = 16;
+    public static final int VRATI_PROIZVOD = 17;
 }

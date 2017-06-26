@@ -57,6 +57,23 @@ public class DatabaseBroker {
         return obj;
     }
 
+    public int sacuvajIVratiId(IDomenskiObjekat obj) throws SQLException, IOException {
+        int id = 0;
+        Connection konekcija = Konekcija.vratiObjekat().vratiKonekciju();
+        String upit = "INSERT INTO " + obj.vratiNazivTabele() + " VALUES (" + obj.vratiVrednostiZaInsert() + ")";
+        System.out.println(upit);
+        try (Statement st = konekcija.createStatement()) {
+            int i = st.executeUpdate(upit, Statement.RETURN_GENERATED_KEYS);
+            if (i != 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                rs.next();
+                id = rs.getInt(1);
+            }
+        }
+
+        return id;
+    }
+
     public IDomenskiObjekat pamtiSlozeniSlog(IDomenskiObjekat odo) throws SQLException, IOException {
         String upit;
         Connection konekcija = Konekcija.vratiObjekat().vratiKonekciju();
@@ -72,12 +89,12 @@ public class DatabaseBroker {
                 insertedId = rs.getInt(1);
             }
             st.close();
-            
-            Racun racun = (Racun)odo;
+
+            Racun racun = (Racun) odo;
             racun.setBrojRacuna(insertedId);
             List<StavkaRacuna> stavke = racun.getStavkeRacuna();
 
-            for (StavkaRacuna stavka: stavke) {
+            for (StavkaRacuna stavka : stavke) {
                 stavka.getRacun().setBrojRacuna(insertedId);
 
                 st = konekcija.createStatement();

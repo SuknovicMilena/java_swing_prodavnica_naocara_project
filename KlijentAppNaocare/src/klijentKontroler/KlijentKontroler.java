@@ -133,7 +133,16 @@ public class KlijentKontroler {
         Korisnik korisnik = (Korisnik) answer.getResponse();
         return korisnik;
     }
-
+    public Proizvod vratiProizvod(int proizvodId) {
+        ZahtevObjekat request = new ZahtevObjekat();
+        request.setAction(Operacije.VRATI_PROIZVOD);
+        request.setParameter(proizvodId);
+        session.Session.getInstance().send(request);
+        OdgovorObjekat answer = Session.getInstance().recieve();
+        Proizvod proizvod = (Proizvod) answer.getResponse();
+        return proizvod;
+    }
+    
     public List<Korisnik> vratiSveKorisnike() {
         List<Korisnik> korisnici = new ArrayList<>();
         ZahtevObjekat request = new ZahtevObjekat();

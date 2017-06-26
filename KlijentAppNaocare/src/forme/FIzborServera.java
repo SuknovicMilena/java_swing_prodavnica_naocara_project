@@ -24,6 +24,7 @@ public class FIzborServera extends javax.swing.JFrame {
     Socket socket;
 
     public FIzborServera() {
+
         initComponents();
         System.out.println("Povezivanje je u toku...");
 
@@ -134,7 +135,6 @@ public class FIzborServera extends javax.swing.JFrame {
         }
 
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

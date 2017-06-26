@@ -19,6 +19,7 @@ import businesslogic.systemoperation.SOVratiSveProizvodjace;
 import businesslogic.systemoperation.SOSacuvajProizvod;
 import businesslogic.systemoperation.SOPrijaviKorisnika;
 import businesslogic.systemoperation.SOPronadjiRacune;
+import businesslogic.systemoperation.SOVratiProizvod;
 import businesslogic.systemoperation.SOVratiStavkeRacuna;
 import businesslogic.systemoperation.SOVratiSveKorisnike;
 import db.DatabaseBroker;
@@ -146,7 +147,17 @@ public class Kontroler {
         }
 
     }
+   public Proizvod vratiProizvod(int pId) throws Exception {
 
+        try {
+            SOVratiProizvod so = new SOVratiProizvod(new DatabaseBroker());
+            so.execute(pId);
+            return so.getProizvod();
+        } catch (Exception ex) {
+            throw new Exception("Greska kod izvrsenja.");
+        }
+
+    }
     public void sacuvajRacun(Racun racun) throws Exception {
 
         DatabaseBroker dBBroker = new DatabaseBroker();

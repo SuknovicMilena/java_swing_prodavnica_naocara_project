@@ -164,7 +164,7 @@ public class FPrijava extends javax.swing.JFrame {
         FRegistracija fregistracija = new FRegistracija();
         fregistracija.setVisible(true);
         fregistracija.setLocationRelativeTo(null);
-        this.setVisible(false);
+        // this.setVisible(false);
     }//GEN-LAST:event_jbtnRegistracijaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

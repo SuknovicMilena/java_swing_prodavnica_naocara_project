@@ -6,9 +6,11 @@
 package modelTabele;
 
 import domen.Proizvod;
+import domen.Proizvodjac;
 
 import domen.Racun;
 import domen.StavkaRacuna;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -19,7 +21,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleStavkaRacuna extends AbstractTableModel {
 
     Racun racun;
-    String[] kolone = {"Rb", "Iznos stavke", "Proizvod"};
+    String[] kolone = {"Rb", "Kolicina", "Cena", "Iznos stavke", "Proizvod"};
     List<Proizvod> listaProizvoda;
 
     public ModelTabeleStavkaRacuna(Racun racun, List<Proizvod> listaProizvoda) {
@@ -44,12 +46,17 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         StavkaRacuna stavkaRacuna = racun.getStavkeRacuna().get(rowIndex);
         switch (columnIndex) {
+
             case 0:
                 return stavkaRacuna.getRedniBrojStavke();
-
             case 1:
-                return stavkaRacuna.getIznosStavke();
+                return stavkaRacuna.getKolicina();
             case 2:
+                return vratiCenu(stavkaRacuna.getProizvod().getProizvodId());
+            case 3:
+                return stavkaRacuna.getKolicina() * vratiCenu(stavkaRacuna.getProizvod().getProizvodId());
+
+            case 4:
                 return vratiProizvod(stavkaRacuna.getProizvod().getProizvodId());
 
             default:
@@ -62,7 +69,7 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
         return kolone[column];
     }
 
-    public void dodajStavku(Proizvod p) {
+    public void dodajStavku(Proizvod p, int kolicina) {
         List<StavkaRacuna> stavkeRacuna = racun.getStavkeRacuna();
         StavkaRacuna sr = null;
         for (StavkaRacuna stavkaRacuna : stavkeRacuna) {
@@ -76,11 +83,13 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
             StavkaRacuna novaSR = new StavkaRacuna();
             novaSR.setRacun(racun);
             novaSR.setRedniBrojStavke(racun.getStavkeRacuna().size() + 1);
-            novaSR.setIznosStavke(p.getCena());
+            novaSR.setKolicina(kolicina);
             novaSR.setProizvod(p);
             racun.getStavkeRacuna().add(novaSR);
+        } else {
+            sr.setKolicina(sr.getKolicina() + kolicina);
         }
-        racun.setUkupanIznos(racun.getUkupanIznos() + p.getCena());
+        racun.setUkupanIznos(racun.getUkupanIznos() + kolicina * p.getCena());
         fireTableDataChanged();
 
     }
@@ -112,6 +121,32 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
     public Proizvod vratiProizvod(int sifra) {
         for (Proizvod proizvod : listaProizvoda) {
             if (proizvod.getProizvodId() == sifra) {
+                return proizvod;
+            }
+        }
+        return null;
+    }
+
+    public double vratiCenu(int sifra) {
+        for (Proizvod proizvod : listaProizvoda) {
+            if (proizvod.getProizvodId() == sifra) {
+                return proizvod.getCena();
+            }
+        }
+        return 0;
+    }
+
+    public List<Proizvod> getProizvodIzStavki() {
+        List<Proizvod> listaProizvodaUStavkama = new ArrayList<>();
+        for (StavkaRacuna st : racun.getStavkeRacuna()) {
+            listaProizvodaUStavkama.add(st.getProizvod());
+        }
+        return listaProizvodaUStavkama;
+    }
+
+    public Proizvod vratiProizvodZaStavku(StavkaRacuna sr) {
+        for (Proizvod proizvod : listaProizvoda) {
+            if (proizvod.getProizvodId() == sr.getProizvod().getProizvodId()) {
                 return proizvod;
             }
         }
