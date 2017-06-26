@@ -113,8 +113,18 @@ public class ModelTabeleStavkaRacuna extends AbstractTableModel {
         return srac;
     }
 
+//    public void obrisiStavku(StavkaRacuna st) {
+//
+//        racun.getStavkeRacuna().remove(st);
+//        fireTableDataChanged();
+//    }
     public void obrisiStavku(StavkaRacuna st) {
         racun.getStavkeRacuna().remove(st);
+        List<StavkaRacuna> lisStavki = racun.getStavkeRacuna();
+
+        for (int i = 0; i < lisStavki.size(); i++) {
+            lisStavki.get(i).setRedniBrojStavke(i + 1);
+        }
         fireTableDataChanged();
     }
 
